@@ -213,4 +213,8 @@ public class Typist
         this.symbol = newSymbol;
     }
 
+    public void resetMistype(){
+        this.justMistyped = false;
+    }
+
 }

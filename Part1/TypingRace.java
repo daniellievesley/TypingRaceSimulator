@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -92,6 +93,34 @@ public class TypingRace
 
             // Print the current state of the race
             printRace();
+
+            if (seat1Typist.getAccuracy()==0.0&&seat2Typist.getAccuracy()==0.0&&seat3Typist.getAccuracy()==0.0){
+            Random r = new Random();
+            int playertoPick = r.nextInt(1,3);
+            if (playertoPick==1){
+                Typist picked = seat1Typist;
+            }
+            else if (playertoPick==2){
+                Typist picked = seat2Typist;
+            }
+            else if (playertoPick==3){
+                Typist picked = seat3Typist;
+            }
+            while (!(picked.isBurntOut())){
+                playertoPick = r.nextInt(1,3);
+                if (playertoPick==1){
+                Typist picked = seat1Typist;
+                }
+                else if (playertoPick==2){
+                Typist picked = seat2Typist;
+                }
+                else if (playertoPick==3){
+                Typist picked = seat3Typist;
+                }
+            }
+            picked.typeCharacter();
+
+        }
 
             // Check if any typist has finished the passage
             if ( raceFinishedBy(seat1Typist) || raceFinishedBy(seat2Typist) || raceFinishedBy(seat3Typist) )

@@ -217,4 +217,8 @@ public class Typist
         this.justMistyped = false;
     }
 
+    public boolean mistypeStatus(){
+        return this.justMistyped;
+    }
+
 }

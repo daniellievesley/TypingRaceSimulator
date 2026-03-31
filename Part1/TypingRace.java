@@ -86,41 +86,32 @@ public class TypingRace
 
         while (!finished)
         {
+            if (seat1Typist.getAccuracy()==0.0&&seat2Typist.getAccuracy()==0.0&&seat3Typist.getAccuracy()==0.0){
+                Random r = new Random();
+                int index = r.nextInt(1,3);
+                Typist toForce = seat1Typist;
+                if (index==2){
+                    toForce = seat2Typist;
+                }
+                else if (index==3){
+                    toForce = seat3Typist;
+                }
+                if(!(toForce.isBurntOut())){
+                    toForce.typeCharacter();
+                }
+            }
+            else{
             // Advance each typist by one turn
             advanceTypist(seat1Typist);
             advanceTypist(seat2Typist);
             advanceTypist(seat3Typist);
+            }
 
             // Print the current state of the race
             printRace();
 
-            if (seat1Typist.getAccuracy()==0.0&&seat2Typist.getAccuracy()==0.0&&seat3Typist.getAccuracy()==0.0){
-            Random r = new Random();
-            int playertoPick = r.nextInt(1,3);
-            if (playertoPick==1){
-                Typist picked = seat1Typist;
-            }
-            else if (playertoPick==2){
-                Typist picked = seat2Typist;
-            }
-            else if (playertoPick==3){
-                Typist picked = seat3Typist;
-            }
-            while (!(picked.isBurntOut())){
-                playertoPick = r.nextInt(1,3);
-                if (playertoPick==1){
-                Typist picked = seat1Typist;
-                }
-                else if (playertoPick==2){
-                Typist picked = seat2Typist;
-                }
-                else if (playertoPick==3){
-                Typist picked = seat3Typist;
-                }
-            }
-            picked.typeCharacter();
+            
 
-        }
 
             // Check if any typist has finished the passage
             if ( raceFinishedBy(seat1Typist) || raceFinishedBy(seat2Typist) || raceFinishedBy(seat3Typist) )
@@ -133,9 +124,9 @@ public class TypingRace
                 TimeUnit.MILLISECONDS.sleep(200);
             } catch (Exception e) {}
         }
+    }
 
         // TODO (Task 2a): Print the winner's name here
-    }
 
     /**
      * Simulates one turn for a typist.

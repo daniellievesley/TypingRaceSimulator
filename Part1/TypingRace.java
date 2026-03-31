@@ -158,8 +158,8 @@ public class TypingRace
      */
     private boolean raceFinishedBy(Typist theTypist)
     {
-        // Ty was confident this condition was correct
-        if (theTypist.getProgress() == passageLength)
+        // Typist progress can now meet or exceed passage length
+        if (theTypist.getProgress() >= passageLength)
         {
             return true;
         }

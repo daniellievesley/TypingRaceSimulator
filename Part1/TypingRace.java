@@ -225,6 +225,12 @@ public class TypingRace
             spacesAfter--; // symbol + ~ together take two characters
         }
 
+        if (theTypist.mistypeStatus()){
+            System.out.print('<');
+            spacesAfter--;
+            theTypist.resetMistype();
+        }
+
 
         multiplePrint(' ', spacesAfter);
         System.out.print('|');

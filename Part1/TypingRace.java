@@ -161,7 +161,9 @@ public class TypingRace
         // Typist progress can now meet or exceed passage length
         if (theTypist.getProgress() >= passageLength)
         {
+            System.out.print(" WON BY: " + theTypist.getName() + " - CONGRATULATIONS!!");
             return true;
+
         }
         else
         {

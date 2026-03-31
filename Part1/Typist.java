@@ -13,6 +13,7 @@ public class Typist
     private int burnOutTurns;
     private double accuracy;
     private boolean justMistyped;
+    final private double originalAccuracy;
 
     // Fields of class Typist
     // Hint: you will need six fields. Think carefully about their types.
@@ -38,6 +39,7 @@ public class Typist
         this.symbol = typistSymbol;
         this.name = typistName;
         this.accuracy = typistAccuracy;
+        this.originalAccuracy = typistAccuracy;
         this.burnOut = false;
         this.currentProgress = 0;
         this.justMistyped = false;
@@ -219,6 +221,10 @@ public class Typist
 
     public boolean mistypeStatus(){
         return this.justMistyped;
+    }
+
+    public double getoriginalAccuracy(){
+        return originalAccuracy;
     }
 
 }

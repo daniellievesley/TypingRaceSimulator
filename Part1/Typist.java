@@ -4,6 +4,8 @@
  * @author Daniel Lievesley
  * @version 25/03/2026
  */
+
+import java.text.DecimalFormat;
 public class Typist
 {
     final private String name;
@@ -202,7 +204,8 @@ public class Typist
             this.accuracy = 0.0;
         }
         else {
-            this.accuracy = newAccuracy;
+            DecimalFormat format = new DecimalFormat("#.00");
+            this.accuracy = Double.parseDouble(format.format(newAccuracy));
         }
     }
 

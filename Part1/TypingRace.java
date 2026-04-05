@@ -182,6 +182,7 @@ public class TypingRace
         if (theTypist.getProgress() >= passageLength)
         {
             System.out.println("  And the winner is... " + theTypist.getName() + "!");
+            theTypist.setAccuracy(theTypist.getAccuracy()+0.05);
             System.out.println("  Final accuracy: " + theTypist.getAccuracy() + " (improved from " + theTypist.getoriginalAccuracy() +")");
             // update accuracy with new accuracy 
             seat1Typist.setAccuracy(seat1Typist.getAccuracy());

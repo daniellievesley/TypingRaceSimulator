@@ -58,7 +58,7 @@ public class Typist
     {
         this.burnOut = true;
         this.burnOutTurns = turns;
-        this.setAccuracy(this.getAccuracy()-(0.2*turns));
+        this.setAccuracy(this.getAccuracy()-this.getAccuracy()* 0.1);
     }
 
     /**

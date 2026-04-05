@@ -88,7 +88,8 @@ public class TypingRace
         {
             if (seat1Typist.getAccuracy()==0.0&&seat2Typist.getAccuracy()==0.0&&seat3Typist.getAccuracy()==0.0){
                 Random r = new Random();
-                int index = r.nextInt(1,3);
+                int index = r.nextInt(1,4);
+                System.out.println("Forcing " + index);
                 Typist toForce = seat1Typist;
                 if (index==2){
                     toForce = seat2Typist;

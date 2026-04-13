@@ -18,10 +18,6 @@ public class TypingRace
     private Typist seat1Typist;
     private Typist seat2Typist;
     private Typist seat3Typist;
-    private double averageAccuracy;
-    private double rangeAccuracy;
-    private double similarityAccuracy;
-
     // Accuracy thresholds for mistype and burnout events
     // (Ty tuned these values "by feel". They may need adjustment.)
     private static final double MISTYPE_BASE_CHANCE = 0.3;
@@ -86,10 +82,6 @@ public class TypingRace
         seat1Typist.resetToStart();
         seat2Typist.resetToStart();
         seat3Typist.resetToStart();
-
-this.averageAccuracy = (seat1Typist.getAccuracy()+seat2Typist.getAccuracy()+seat3Typist.getAccuracy())/3;
-        this.rangeAccuracy=(Math.max(seat1Typist.getAccuracy(), Math.max(seat2Typist.getAccuracy(), seat3Typist.getAccuracy()))-Math.min(seat1Typist.getAccuracy(), (Math.min(seat2Typist.getAccuracy(), seat3Typist.getAccuracy()))));
-        this.similarityAccuracy = 1-this.rangeAccuracy;
 
         while (!finished)
         {
@@ -164,7 +156,7 @@ this.averageAccuracy = (seat1Typist.getAccuracy()+seat2Typist.getAccuracy()+seat
         }
 
         // Mistype check — the probability should reflect the typist's accuracy
-        if (Math.random() < (1.0-theTypist.getAccuracy()) * (MISTYPE_BASE_CHANCE))
+        if (Math.random() < (1.0-theTypist.getAccuracy()) * MISTYPE_BASE_CHANCE)
         {
             theTypist.slideBack(SLIDE_BACK_AMOUNT);
         }

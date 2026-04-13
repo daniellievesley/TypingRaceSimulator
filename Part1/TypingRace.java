@@ -14,14 +14,10 @@ import java.util.concurrent.TimeUnit;
  */
 public class TypingRace
 {
-    private int passageLength;   // Total characters in the passage to type
+    private final int PASSAGE_LENGTH;   // Total characters in the passage to type
     private Typist seat1Typist;
     private Typist seat2Typist;
     private Typist seat3Typist;
-    private static double averageAccuracy;
-    private static double rangeAccuracy;
-    private static double similarityAccuracy;
-    private static double boost;
     // Accuracy thresholds for mistype and burnout events
     // (Ty tuned these values "by feel". They may need adjustment.)
     private static final double MISTYPE_BASE_CHANCE = 0.3;
@@ -33,11 +29,11 @@ public class TypingRace
      * Sets up the race with a passage of the given length.
      * Initially there are no typists seated.
      *
-     * @param passageLength the number of characters in the passage to type
+     * @param PASSAGE_LENGTH the number of characters in the passage to type
      */
-    public TypingRace(int passageLength)
+    public TypingRace(int PASSAGE_LENGTH)
     {
-        this.passageLength = passageLength;
+        this.PASSAGE_LENGTH = PASSAGE_LENGTH;
         seat1Typist = null;
         seat2Typist = null;
         seat3Typist = null;
@@ -87,11 +83,6 @@ public class TypingRace
         seat1Typist.resetToStart();
         seat2Typist.resetToStart();
         seat3Typist.resetToStart();
-
-        averageAccuracy = (seat1Typist.getAccuracy()+seat2Typist.getAccuracy()+seat3Typist.getAccuracy())/3;
-        rangeAccuracy=(Math.max(seat1Typist.getAccuracy(), Math.max(seat2Typist.getAccuracy(), seat3Typist.getAccuracy()))-Math.min(seat1Typist.getAccuracy(), (Math.min(seat2Typist.getAccuracy(), seat3Typist.getAccuracy()))));
-        similarityAccuracy = 1-rangeAccuracy;
-        boost=1 - (0.3 * (1 - similarityAccuracy));
 
         while (!finished)
         {
@@ -166,7 +157,7 @@ public class TypingRace
         }
 
         // Mistype check — the probability should reflect the typist's accuracy
-        if (Math.random() < (1.0-theTypist.getAccuracy()) * MISTYPE_BASE_CHANCE * boost)
+        if (Math.random() < (1.0-theTypist.getAccuracy()) * MISTYPE_BASE_CHANCE)
         {
             theTypist.slideBack(SLIDE_BACK_AMOUNT);
         }
@@ -188,7 +179,7 @@ public class TypingRace
     private boolean raceFinishedBy(Typist theTypist)
     {
         // Typist progress can now meet or exceed passage length
-        if (theTypist.getProgress() >= passageLength)
+        if (theTypist.getProgress() >= PASSAGE_LENGTH)
         {
             System.out.println("  And the winner is... " + theTypist.getName() + "!");
             theTypist.setAccuracy(theTypist.getAccuracy()+0.05);
@@ -220,8 +211,8 @@ public class TypingRace
     {
         System.out.print('\u000C'); // Clear terminal
 
-        System.out.println("  TYPING RACE — passage length: " + passageLength + " chars");
-        multiplePrint('=', passageLength + 3);
+        System.out.println("  TYPING RACE — passage length: " + PASSAGE_LENGTH + " chars");
+        multiplePrint('=', PASSAGE_LENGTH + 3);
         System.out.println();
 
         printSeat(seat1Typist);
@@ -233,7 +224,7 @@ public class TypingRace
         printSeat(seat3Typist);
         System.out.println();
 
-        multiplePrint('=', passageLength + 3);
+        multiplePrint('=', PASSAGE_LENGTH + 3);
         System.out.println();
         System.out.println("  [~] = burnt out    [<] = just mistyped");
     }
@@ -253,7 +244,7 @@ public class TypingRace
     private void printSeat(Typist theTypist)
     {
         int spacesBefore = theTypist.getProgress();
-        int spacesAfter  = passageLength - theTypist.getProgress();
+        int spacesAfter  = PASSAGE_LENGTH - theTypist.getProgress();
 
         System.out.print('|');
         multiplePrint(' ', spacesBefore);

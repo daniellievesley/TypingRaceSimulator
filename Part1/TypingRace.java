@@ -182,7 +182,12 @@ public class TypingRace
         {
             System.out.println("  And the winner is... " + theTypist.getName() + "!");
             theTypist.setAccuracy(theTypist.getAccuracy()+0.05);
-            System.out.println("  Final accuracy: " + theTypist.getAccuracy() + " (improved from " + theTypist.getoriginalAccuracy() +")");
+            if (theTypist.getAccuracy()>theTypist.getoriginalAccuracy()){
+                System.out.println("  Final accuracy: " + theTypist.getAccuracy() + " (improved from " + theTypist.getoriginalAccuracy() +")");
+            }
+            else {
+            System.out.println("  Final accuracy: " + theTypist.getAccuracy() + " (decreased from " + theTypist.getoriginalAccuracy() +")");
+            }
             // update accuracy with new accuracy 
             seat1Typist.setAccuracy(seat1Typist.getAccuracy());
             seat2Typist.setAccuracy(seat2Typist.getAccuracy());

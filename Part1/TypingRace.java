@@ -186,6 +186,9 @@ public class TypingRace
             if (theTypist.getAccuracy()>theTypist.getoriginalAccuracy()){
                 System.out.println("  Final accuracy: " + theTypist.getAccuracy() + " (improved from " + theTypist.getoriginalAccuracy() +")");
             }
+            else if (theTypist.getAccuracy()==theTypist.getoriginalAccuracy()) {
+            System.out.println("  Final accuracy: " + theTypist.getAccuracy() + " (remained same from " + theTypist.getoriginalAccuracy() +")");
+            }
             else {
             System.out.println("  Final accuracy: " + theTypist.getAccuracy() + " (decreased from " + theTypist.getoriginalAccuracy() +")");
             }

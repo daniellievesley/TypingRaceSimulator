@@ -13,6 +13,7 @@ public class IntroPage {
         panelTitle.add(titleText);
         // passage chooser panel
         JPanel passageChooser = new JPanel();
+        passageChooser.setBackground(Color.ORANGE);
         JLabel passageLabelText = new JLabel("Choose passage length");
         frame.add(passageChooser, BorderLayout.EAST);
         passageChooser.add(passageLabelText);
@@ -24,6 +25,7 @@ public class IntroPage {
         passageChooser.add(customText);
         // seat chooser panel
         JPanel seatChooser = new JPanel();
+        seatChooser.setBackground(Color.PINK);
         JLabel seatChooserLabel = new JLabel("Number of seats");
         seatChooser.add(seatChooserLabel);
         Integer [] noOfSeatsAvailable = { 2, 3, 4, 5, 6};
@@ -33,6 +35,7 @@ public class IntroPage {
 
         // dificulty modifiers panel 
         JPanel modifiersPanel = new JPanel();
+        modifiersPanel.setBackground(Color.CYAN);
         JLabel modifiersPanelLabel = new JLabel("Spice up the game: add modifiers!");
         modifiersPanel.add(modifiersPanelLabel);
         JCheckBox autoCorrect = new JCheckBox("Auto correct on/off");

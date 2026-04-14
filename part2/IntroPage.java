@@ -7,7 +7,6 @@ public class IntroPage {
         JFrame frame = new JFrame("Setup - Typing Race Simulator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
-
         JPanel panelTitle = new JPanel();
         JLabel titleText = new JLabel("Welcome to the Typing Race Simulator!");
         frame.add(panelTitle, BorderLayout.NORTH);
@@ -15,7 +14,7 @@ public class IntroPage {
         // passage chooser panel
         JPanel passageChooser = new JPanel();
         JLabel passageLabelText = new JLabel("Choose passage length");
-        frame.add(passageChooser, BorderLayout.CENTER);
+        frame.add(passageChooser, BorderLayout.EAST);
         passageChooser.add(passageLabelText);
         String[] lengths = {"Short", "Medium", "Long", "Custom"};
         JComboBox passageLenBox = new JComboBox<>(lengths);
@@ -30,6 +29,9 @@ public class IntroPage {
         Integer [] noOfSeatsAvailable = { 2, 3, 4, 5, 6};
         JComboBox seatsPicked = new JComboBox<>(noOfSeatsAvailable);
         seatChooser.add(seatsPicked);
+        frame.add(seatChooser, BorderLayout.CENTER);
+
+        // dificulty modifiers panel 
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

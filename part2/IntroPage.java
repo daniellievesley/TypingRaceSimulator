@@ -45,6 +45,12 @@ public class IntroPage {
         modifiersPanel.add(caffeineMode);
         modifiersPanel.add(nightShift);
         frame.add(modifiersPanel, BorderLayout.WEST);
+
+        // continue panel
+        JPanel continuetoGamePanel = new JPanel();
+        JButton continuetoGame = new JButton("Continue to game");
+        continuetoGamePanel.add(continuetoGame);
+        frame.add(continuetoGamePanel, BorderLayout.SOUTH);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

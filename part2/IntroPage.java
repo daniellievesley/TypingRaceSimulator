@@ -41,6 +41,7 @@ public class IntroPage {
         modifiersPanel.add(autoCorrect);
         modifiersPanel.add(caffeineMode);
         modifiersPanel.add(nightShift);
+        frame.add(modifiersPanel, BorderLayout.WEST);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

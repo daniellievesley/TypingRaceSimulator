@@ -32,6 +32,15 @@ public class IntroPage {
         frame.add(seatChooser, BorderLayout.CENTER);
 
         // dificulty modifiers panel 
+        JPanel modifiersPanel = new JPanel();
+        JLabel modifiersPanelLabel = new JLabel("Spice up the game: add modifiers!");
+        modifiersPanel.add(modifiersPanelLabel);
+        JCheckBox autoCorrect = new JCheckBox("Auto correct on/off");
+        JCheckBox caffeineMode = new JCheckBox("Caffeine Mode");
+        JCheckBox nightShift = new JCheckBox("Night shift");
+        modifiersPanel.add(autoCorrect);
+        modifiersPanel.add(caffeineMode);
+        modifiersPanel.add(nightShift);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

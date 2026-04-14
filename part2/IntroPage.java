@@ -19,7 +19,7 @@ public class IntroPage {
         passageChooser.add(passageLabelText);
         String[] lengths = {"Short", "Medium", "Long", "Custom"};
         JComboBox passageLenBox = new JComboBox<>(lengths);
-        JTextField customText = new JTextField("Enter custom passage, if appropriate");
+        JTextField customText = new JTextField("Passage here", 20);
         passageLenBox.setEditable(true);
         passageChooser.add(passageLenBox);
         passageChooser.add(customText);

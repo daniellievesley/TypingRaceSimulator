@@ -6,10 +6,10 @@ public class Main {
     public static void main(String[] args){
     JFrame frame = new JFrame("Typing Race Simulator");
     CardLayout layout = new CardLayout();
-    JPanel mainPanel = new JPanel(layout);
-    IntroPage introSetup = new IntroPage();
-    RacePage raceArea = new RacePage();
-    ResultsPage resultArea = new ResultsPage();
+    JPanel mainPanel = new JPanel(mainPanel, layout);
+    IntroPage introSetup = new IntroPage(mainPanel, layout);
+    RacePage raceArea = new RacePage(lmainPanel, ayout);
+    ResultsPage resultArea = new ResultsPage(layout);
     mainPanel.add(IntroPage, "INTRO");
     mainPanel.add(RacePage, "RACE");
     mainPanel.add(ResultsPage, "RESULTS");

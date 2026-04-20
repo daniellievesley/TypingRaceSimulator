@@ -18,7 +18,7 @@ public class IntroPage {
         frame.add(passageChooser, BorderLayout.EAST);
         passageChooser.add(passageLabelText);
         String[] lengths = {"Short", "Medium", "Long", "Custom"};
-        JComboBox passageLenBox = new JComboBox<>(lengths);
+        JComboBox<String> passageLenBox = new JComboBox<>(lengths);
         JTextField customText = new JTextField("Passage here", 20);
         passageLenBox.setEditable(true);
         passageChooser.add(passageLenBox);
@@ -29,7 +29,7 @@ public class IntroPage {
         JLabel seatChooserLabel = new JLabel("Number of seats");
         seatChooser.add(seatChooserLabel);
         Integer [] noOfSeatsAvailable = { 2, 3, 4, 5, 6};
-        JComboBox seatsPicked = new JComboBox<>(noOfSeatsAvailable);
+        JComboBox<Integer> seatsPicked = new JComboBox<>(noOfSeatsAvailable);
         seatChooser.add(seatsPicked);
         frame.add(seatChooser, BorderLayout.CENTER);
 
@@ -54,5 +54,12 @@ public class IntroPage {
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+
+        // event listener when continue is clicked
+        continuetoGame.addActionListener(e -> moveToFeatures(frame));
+    }
+
+    public static void moveToFeatures(JFrame frame){
+        
     }
 }

@@ -3,7 +3,7 @@ import java.awt.*;
 import javax.swing.*;
 
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args){}
     JFrame frame = new JFrame("Typing Race Simulator");
     CardLayout layout = new CardLayout();
     JPanel mainPanel = new JPanel(layout);

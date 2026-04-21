@@ -19,7 +19,6 @@ public class IntroPage extends JPanel{
         passageLenBox.setEditable(true);
         passageChooser.add(passageLenBox);
         passageChooser.add(customText);
-        add(passageChooser, BorderLayout.WEST);
         // seat chooser panel
         JPanel seatChooser = new JPanel();
         seatChooser.setBackground(Color.PINK);
@@ -28,7 +27,6 @@ public class IntroPage extends JPanel{
         Integer [] noOfSeatsAvailable = { 2, 3, 4, 5, 6};
         JComboBox<Integer> seatsPicked = new JComboBox<>(noOfSeatsAvailable);
         seatChooser.add(seatsPicked);
-        add(seatChooser, BorderLayout.CENTER);
 
         // dificulty modifiers panel 
         JPanel modifiersPanel = new JPanel();
@@ -41,12 +39,10 @@ public class IntroPage extends JPanel{
         modifiersPanel.add(autoCorrect);
         modifiersPanel.add(caffeineMode);
         modifiersPanel.add(nightShift);
-        add(modifiersPanel, BorderLayout.EAST);
 
         // continue panel
         JPanel continuetoGamePanel = new JPanel();
         JButton continuetoGame = new JButton("Continue to game");
         continuetoGamePanel.add(continuetoGame);
-        add(modifiersPanel, BorderLayout.SOUTH);
     }
 }

@@ -2,20 +2,16 @@ package part2;
 import java.awt.*;
 import javax.swing.*;
 
-public class IntroPage {
-    public static void main (String[] args){
-        JFrame frame = new JFrame("Setup - Typing Race Simulator");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLayout(new BorderLayout());
+public class IntroPage extends JPanel{
+    IntroPage(JPanel app){
         JPanel panelTitle = new JPanel();
         JLabel titleText = new JLabel("Welcome to the Typing Race Simulator!");
-        frame.add(panelTitle, BorderLayout.NORTH);
         panelTitle.add(titleText);
+        add(panelTitle, BorderLayout.NORTH);
         // passage chooser panel
         JPanel passageChooser = new JPanel();
         passageChooser.setBackground(Color.ORANGE);
         JLabel passageLabelText = new JLabel("Choose passage length");
-        frame.add(passageChooser, BorderLayout.EAST);
         passageChooser.add(passageLabelText);
         String[] lengths = {"Short", "Medium", "Long", "Custom"};
         JComboBox<String> passageLenBox = new JComboBox<>(lengths);
@@ -31,7 +27,6 @@ public class IntroPage {
         Integer [] noOfSeatsAvailable = { 2, 3, 4, 5, 6};
         JComboBox<Integer> seatsPicked = new JComboBox<>(noOfSeatsAvailable);
         seatChooser.add(seatsPicked);
-        frame.add(seatChooser, BorderLayout.CENTER);
 
         // dificulty modifiers panel 
         JPanel modifiersPanel = new JPanel();
@@ -44,22 +39,10 @@ public class IntroPage {
         modifiersPanel.add(autoCorrect);
         modifiersPanel.add(caffeineMode);
         modifiersPanel.add(nightShift);
-        frame.add(modifiersPanel, BorderLayout.WEST);
 
         // continue panel
         JPanel continuetoGamePanel = new JPanel();
         JButton continuetoGame = new JButton("Continue to game");
         continuetoGamePanel.add(continuetoGame);
-        frame.add(continuetoGamePanel, BorderLayout.SOUTH);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-
-        // event listener when continue is clicked
-        continuetoGame.addActionListener(e -> moveToFeatures(frame));
-    }
-
-    public static void moveToFeatures(JFrame frame){
-        
     }
 }

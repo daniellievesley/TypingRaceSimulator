@@ -4,7 +4,6 @@ import javax.swing.*;
 
 public class IntroPage extends JPanel{
     IntroPage(JPanel app){
-        setLayout(new BorderLayout());
         JPanel panelTitle = new JPanel();
         JLabel titleText = new JLabel("Welcome to the Typing Race Simulator!");
         panelTitle.add(titleText);
@@ -48,6 +47,6 @@ public class IntroPage extends JPanel{
         JPanel continuetoGamePanel = new JPanel();
         JButton continuetoGame = new JButton("Continue to game");
         continuetoGamePanel.add(continuetoGame);
-        add(continuetoGamePanel, BorderLayout.SOUTH);
+        add(modifiersPanel, BorderLayout.SOUTH);
     }
 }

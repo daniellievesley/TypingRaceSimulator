@@ -3,7 +3,7 @@ import java.awt.*;
 import javax.swing.*;
 
 public class IntroPage extends JPanel{
-    IntroPage(JPanel app, CustomiseTypists customiseCard){
+    IntroPage(JPanel app, JPanel customiseCard){
         setLayout(new BorderLayout());
         JPanel panelTitle = new JPanel();
         JLabel titleText = new JLabel("Welcome to the Typing Race Simulator!");

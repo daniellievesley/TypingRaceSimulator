@@ -7,13 +7,9 @@ public class Main {
     JFrame frame = new JFrame("Typing Race Simulator");
     CardLayout layout = new CardLayout();
     JPanel mainPanel = new JPanel(layout);
-    IntroPage introSetup = new IntroPage();
-    RacePage raceArea = new RacePage();
-    ResultsPage resultArea = new ResultsPage();
-    mainPanel.add(IntroPage, "INTRO");
-    mainPanel.add(RacePage, "RACE");
-    mainPanel.add(ResultsPage, "RESULTS");
-    frame.add(mainPanel);
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    IntroPage introSetup = new IntroPage(layout, mainPanel);
+    RacePage raceArea = new RacePage(layout, mainPanel);
+    ResultsPage resultArea = new ResultsPage(layout, mainPanel);
+    mainPanel.add();
 }
 }

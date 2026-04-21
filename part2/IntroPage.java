@@ -14,7 +14,7 @@ public class IntroPage {
         panelTitle.add(titleText);
         // passage chooser panel
         JPanel passageChooser = new JPanel();
-        JLabel passageLabelText = new JLabel("Choose passage length");
+        JLabel passageLabelText = new JLabel("Choose pre-set passage length or insert");
         frame.add(passageChooser, BorderLayout.CENTER);
         passageChooser.add(passageLabelText);
         String[] lengths = {"Short", "Medium", "Long", "Custom"};
@@ -22,14 +22,6 @@ public class IntroPage {
         JTextField customText = new JTextField("Enter custom passage, if appropriate");
         passageLenBox.setEditable(true);
         passageChooser.add(passageLenBox);
-        passageChooser.add(customText);
-        // seat chooser panel
-        JPanel seatChooser = new JPanel();
-        JLabel seatChooserLabel = new JLabel("Number of seats");
-        seatChooser.add(seatChooserLabel);
-        Integer [] noOfSeatsAvailable = { 2, 3, 4, 5, 6};
-        JComboBox seatsPicked = new JComboBox<>(noOfSeatsAvailable);
-        seatChooser.add(seatsPicked);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

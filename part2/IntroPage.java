@@ -49,5 +49,11 @@ public class IntroPage extends JPanel{
         JButton continuetoGame = new JButton("Continue to game");
         continuetoGamePanel.add(continuetoGame);
         add(continuetoGamePanel, BorderLayout.SOUTH);
-    }
+
+        continuetoGame.addActionListener(e ->{
+        CardLayout layout = (CardLayout) app.getLayout();
+        layout.show(app, "CustomiseTypists");
+
+    });
+}
 }

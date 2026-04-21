@@ -3,7 +3,7 @@ import java.awt.*;
 import javax.swing.*;
 
 public class IntroPage extends JPanel{
-    IntroPage(JPanel app, JPanel customiseCard){
+    IntroPage(JPanel app){
         setLayout(new BorderLayout());
         JPanel panelTitle = new JPanel();
         JLabel titleText = new JLabel("Welcome to the Typing Race Simulator!");
@@ -52,14 +52,6 @@ public class IntroPage extends JPanel{
 
         continuetoGame.addActionListener(e ->{
         CardLayout layout = (CardLayout) app.getLayout();
-        // now to take values from fields and pass them
-        Integer length = (Integer) passageLenBox.getSelectedItem();
-        String customPassage = customText.getName();
-        Integer seats = (Integer) seatsPicked.getSelectedItem();
-        Boolean auto = autoCorrect.isSelected();
-        Boolean caffeine = caffeineMode.isSelected();
-        Boolean night = nightShift.isSelected();
-        customiseCard.takeData(length, customPassage, seats, auto, caffeine, night);
         layout.show(app, "CustomiseTypists");
 
     });

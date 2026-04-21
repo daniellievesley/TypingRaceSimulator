@@ -16,8 +16,7 @@ public class IntroPage extends JPanel{
         passageChooser.add(passageLabelText);
         String[] lengths = {"Short", "Medium", "Long", "Custom"};
         JComboBox<String> passageLenBox = new JComboBox<>(lengths);
-        JTextField customText = new JTextField(20);
-        customText.setToolTipText("Type a custom passage");
+        JTextField customText = new JTextField("Passage here", 20);
         passageLenBox.setEditable(true);
         passageChooser.add(passageLenBox);
         passageChooser.add(customText);
@@ -54,15 +53,15 @@ public class IntroPage extends JPanel{
         continuetoGame.addActionListener(e ->{
         CardLayout layout = (CardLayout) app.getLayout();
         // now to take values from fields and pass them
-        String length = (String) passageLenBox.getSelectedItem();
-        String customPassage = customText.getText();
+        Integer length = (Integer) passageLenBox.getSelectedItem();
+        String customPassage = customText.getName();
         Integer seats = (Integer) seatsPicked.getSelectedItem();
         Boolean auto = autoCorrect.isSelected();
         Boolean caffeine = caffeineMode.isSelected();
         Boolean night = nightShift.isSelected();
         customiseCard.takeData(length, customPassage, seats, auto, caffeine, night);
         layout.show(app, "CustomiseTypists");
-        
+
     });
 }
 }

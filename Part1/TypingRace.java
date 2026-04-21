@@ -176,7 +176,7 @@ public class TypingRace
      * @param theTypist the typist to check
      * @return true if their progress has reached or passed the passage length
      */
-    private boolean raceFinishedBy(Typist theTypist)
+     private boolean raceFinishedBy(Typist theTypist)
     {
         // Typist progress can now meet or exceed passage length
         if (theTypist.getProgress() >= PASSAGE_LENGTH)

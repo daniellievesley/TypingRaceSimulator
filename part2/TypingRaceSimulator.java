@@ -8,8 +8,10 @@ public class TypingRaceSimulator {
         mainApp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         CardLayout layout = new CardLayout();
         JPanel appCard = new JPanel(layout);
-        JPanel introCard = new IntroPage(appCard);
+        JPanel customiseCard = new CustomiseTypists(appCard);
+        JPanel introCard = new IntroPage(appCard, customiseCard);
         appCard.add(introCard, "Intro");
+        appCard.add(customiseCard, "CustomiseTypists");
         mainApp.add(appCard);
         mainApp.pack();
         mainApp.setLocationRelativeTo(null);

@@ -25,7 +25,9 @@ public class CustomiseTypists extends JPanel {
         this.night = night;
         for (int i=1; i<=seats; i++){
             JPanel typistChildPanel = new JPanel();
-            typistChildPanel.add(new JLabel("Typist " + i));
+            JLabel typistLabel = new JLabel("Typist " + i);
+            typistLabel.setFont(typistLabel.getFont().deriveFont(Font.BOLD));
+            typistChildPanel.add(typistLabel);
             add(typistChildPanel);
             String[] styles = {"Touch Typist", "Hunt & Peck", "Phone Thumbs", "Voice-to-Text"};
             JComboBox<String> typingStyle = new JComboBox<>(styles);

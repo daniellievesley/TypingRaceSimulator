@@ -11,7 +11,7 @@ public class CustomiseTypists extends JPanel {
     boolean night;
 
     public CustomiseTypists(JPanel mainPanel) {
-        setLayout(new BoxLayout());
+        setLayout(new GridLayout(0,1));
         JLabel label = new JLabel("Customising typists", SwingConstants.CENTER);
         add(label, BorderLayout.CENTER);
     }
@@ -23,9 +23,10 @@ public class CustomiseTypists extends JPanel {
         this.auto = auto;
         this.caffeine = caffeine;
         this.night = night;
-        for (int i=0; i<seats; i++){
+        for (int i=1; i<=seats; i++){
             JPanel typistChildPanel = new JPanel();
             typistChildPanel.add(new JLabel("Typist " + i));
+            add(typistChildPanel);
             String[] styles = {"Touch Typist", "Hunt & Peck", "Phone Thumbs", "Voice-to-Text"};
             JComboBox<String> typingStyle = new JComboBox<>(styles);
             String[] keyboardTypes = {"Mechanical", "Membrane", "Touchscreen", "Stenography"};

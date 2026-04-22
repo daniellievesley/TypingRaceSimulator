@@ -16,7 +16,7 @@ public class CustomiseTypists extends JPanel {
         add(label, BorderLayout.CENTER);
     }
 
-    public void takeData(String len, String passage, Integer seats, Boolean auto, Boolean caffeine, boolean night) {
+    public void takeData(String len, String passage, Integer seats, Boolean auto, Boolean caffeine, boolean night, JPanel app) {
         this.len = len;
         this.passage = passage;
         this.seats = seats;
@@ -49,9 +49,12 @@ public class CustomiseTypists extends JPanel {
 
         } 
         JButton contToGame = new JButton("Start game now");
-        add(contToGame);   
-    }
+        add(contToGame);
 
-    
-    
+        contToGame.addActionListener(e -> {
+            CardLayout layout = (CardLayout) app.getLayout();
+            layout.show(app, "RacePage");
+    });
+
+}
 }

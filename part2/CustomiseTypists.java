@@ -29,19 +29,30 @@ public class CustomiseTypists extends JPanel {
             typistLabel.setFont(typistLabel.getFont().deriveFont(Font.BOLD));
             typistChildPanel.add(typistLabel);
             add(typistChildPanel);
+            // customising each typist - controls 
             String[] styles = {"Touch Typist", "Hunt & Peck", "Phone Thumbs", "Voice-to-Text"};
             JComboBox<String> typingStyle = new JComboBox<>(styles);
+            typistChildPanel.add(typingStyle);
             String[] keyboardTypes = {"Mechanical", "Membrane", "Touchscreen", "Stenography"};
             JComboBox<String> keyboardType = new JComboBox<>(keyboardTypes);
+            typistChildPanel.add(keyboardType);
             JTextField symbol = new JTextField(10);
+            typistChildPanel.add(symbol);
             JButton clrPickerReq = new JButton("Pick a typist colour");
+            typistChildPanel.add(clrPickerReq);
             clrPickerReq.addActionListener(e -> {
                 JColorChooser clrChooser = new JColorChooser();
                 Color color = JColorChooser.showDialog(null, "Pick a typist colour", Color.blue);
+                typistChildPanel.remove(clrPickerReq);
+                JLabel clrStatement = new JLabel("Colour chosen");
+                clrStatement.setBackground(color);
+                add(clrStatement);
             });
             
 
         }
+        revalidate();
+        repaint();
         
     }
 

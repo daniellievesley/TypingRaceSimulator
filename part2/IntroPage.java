@@ -59,7 +59,7 @@ public class IntroPage extends JPanel{
         Boolean auto = autoCorrect.isSelected();
         Boolean caffeine = caffeineMode.isSelected();
         Boolean night = nightShift.isSelected();
-        customiseCard.takeData(length, customPassage, seats, auto, caffeine, night);
+        customiseCard.takeData(length, customPassage, seats, auto, caffeine, night, app);
         layout.show(app, "CustomiseTypists");
         
     });

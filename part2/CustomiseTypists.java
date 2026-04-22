@@ -46,7 +46,8 @@ public class CustomiseTypists extends JPanel {
                 System.out.println(colorTypist);
                 typistChildPanel.add(clrChooser);
             });
-            
+            JButton contToGame = new JButton("Start game now");
+            add(contToGame);
 
         }    
     }

@@ -3,7 +3,7 @@ import java.awt.*;
 import javax.swing.*;
 
 public class IntroPage extends JPanel{
-    IntroPage(JPanel app, CustomiseTypists customiseCard){
+    IntroPage(JPanel app, CustomiseTypists customiseCard, RacePage racePage){
         setLayout(new BorderLayout());
         JPanel panelTitle = new JPanel();
         JLabel titleText = new JLabel("Welcome to the Typing Race Simulator!");
@@ -59,7 +59,7 @@ public class IntroPage extends JPanel{
         Boolean auto = autoCorrect.isSelected();
         Boolean caffeine = caffeineMode.isSelected();
         Boolean night = nightShift.isSelected();
-        customiseCard.takeData(length, customPassage, seats, auto, caffeine, night, app);
+        customiseCard.takeData(length, customPassage, seats, auto, caffeine, night, app, racePage);
         layout.show(app, "CustomiseTypists");
         
     });

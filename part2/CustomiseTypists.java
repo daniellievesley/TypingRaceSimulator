@@ -16,7 +16,7 @@ public class CustomiseTypists extends JPanel {
         add(label, BorderLayout.CENTER);
     }
 
-    public void takeData(String len, String passage, Integer seats, Boolean auto, Boolean caffeine, boolean night, JPanel app) {
+    public void takeData(String len, String passage, Integer seats, Boolean auto, Boolean caffeine, boolean night, JPanel app, RacePage racePage) {
         this.len = len;
         this.passage = passage;
         this.seats = seats;

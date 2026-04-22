@@ -42,12 +42,13 @@ public class CustomiseTypists extends JPanel {
             typistChildPanel.add(clrPickerReq);
             clrPickerReq.addActionListener(e -> {
                 JColorChooser clrChooser = new JColorChooser();
-                Color color = JColorChooser.showDialog(null, "Pick a typist colour", Color.blue);
+                Color colorTypist = JColorChooser.showDialog(null, "Pick a typist colour", Color.blue);
+                System.out.println(colorTypist);
+                typistChildPanel.add(clrChooser);
             });
             
 
-        }
-        
+        }    
     }
 
     

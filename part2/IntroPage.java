@@ -18,7 +18,6 @@ public class IntroPage extends JPanel{
         JComboBox<String> passageLenBox = new JComboBox<>(lengths);
         JTextField customText = new JTextField(20);
         customText.setToolTipText("Type a custom passage");
-        passageLenBox.setEditable(true);
         passageChooser.add(passageLenBox);
         passageChooser.add(customText);
         add(passageChooser, BorderLayout.WEST);

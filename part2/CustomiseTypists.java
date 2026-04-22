@@ -47,8 +47,6 @@ public class CustomiseTypists extends JPanel {
             
 
         }
-        revalidate();
-        repaint();
         
     }
 

@@ -46,12 +46,12 @@ public class CustomiseTypists extends JPanel {
             keyboardType.setName("Symbol");
             typistChildPanel.add(symbol);
             JButton clrPickerReq = new JButton("Pick a typist colour");
-            keyboardType.setName("Colour");
             typistChildPanel.add(clrPickerReq);
             typistPanels.add(typistChildPanel);
             clrPickerReq.addActionListener(e -> {
                 JColorChooser clrChooser = new JColorChooser();
                 Color colorTypist = JColorChooser.showDialog(null, "Pick a typist colour", Color.blue);
+                colorTypist.setName("Colour");
                 System.out.println(colorTypist);
                 typistChildPanel.add(clrChooser);
             });
@@ -74,7 +74,7 @@ public void createTypists(List<JPanel> panels){
     for (int i=0; i<panels.size(); i++){
         Component[] c = panels.get(i).getComponents();
         for (int j=0; j<c.length; j++){
-
+            ()
         }
     }
 }

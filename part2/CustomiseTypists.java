@@ -2,6 +2,9 @@ package part2;
 import java.awt.*;
 import javax.swing.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CustomiseTypists extends JPanel {
     String len;
     String passage;
@@ -23,6 +26,7 @@ public class CustomiseTypists extends JPanel {
         this.auto = auto;
         this.caffeine = caffeine;
         this.night = night;
+        List<JPanel> typistPanels = new ArrayList<>();
         for (int i=1; i<=seats; i++){
             JPanel typistChildPanel = new JPanel();
             JLabel typistLabel = new JLabel("Typist " + i);
@@ -40,6 +44,7 @@ public class CustomiseTypists extends JPanel {
             typistChildPanel.add(symbol);
             JButton clrPickerReq = new JButton("Pick a typist colour");
             typistChildPanel.add(clrPickerReq);
+            typistPanels.add(typistChildPanel);
             clrPickerReq.addActionListener(e -> {
                 JColorChooser clrChooser = new JColorChooser();
                 Color colorTypist = JColorChooser.showDialog(null, "Pick a typist colour", Color.blue);
@@ -53,8 +58,20 @@ public class CustomiseTypists extends JPanel {
 
         contToGame.addActionListener(e -> {
             CardLayout layout = (CardLayout) app.getLayout();
-            layout.show(app, "RacePage");
+            createTypists(typistPanels);
+            
+            // racePage.passData()
+            //layout.show(app, "RacePage");
     });
 
+}
+
+public void createTypists(List<JPanel> panels){
+    for (int i=0; i<panels.size(); i++){
+        Component[] c = panels.get(i).getComponents();
+        for (int j=0; j<c.length; j++){
+
+        }
+    }
 }
 }

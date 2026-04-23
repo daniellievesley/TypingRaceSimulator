@@ -5,12 +5,6 @@ import java.util.List;
 import javax.swing.*;
 
 public class CustomiseTypists extends JPanel {
-    String len;
-    String passage;
-    Integer seats;
-    boolean auto;
-    boolean caffeine;
-    boolean night;
 
     public CustomiseTypists(JPanel mainPanel) {
         setLayout(new GridLayout(0,1));
@@ -19,12 +13,7 @@ public class CustomiseTypists extends JPanel {
     }
 
     public void takeData(String len, String passage, Integer seats, Boolean auto, Boolean caffeine, boolean night, JPanel app, RacePage racePage) {
-        this.len = len;
-        this.passage = passage;
-        this.seats = seats;
-        this.auto = auto;
-        this.caffeine = caffeine;
-        this.night = night;
+        GameData gameInfo = new GameData(len, passage, seats, auto, caffeine, night);
         List<JPanel> typistPanels = new ArrayList<>();
         List<TypistRowData> typistData = new ArrayList<>();
         for (int i=1; i<=seats; i++){
@@ -34,6 +23,8 @@ public class CustomiseTypists extends JPanel {
             typistChildPanel.add(typistLabel);
             add(typistChildPanel);
             // customising each typist - controls 
+            JTextField name = new JTextField("Name", 10);
+            typistChildPanel.add(name);
             String[] styles = {"Touch Typist", "Hunt & Peck", "Phone Thumbs", "Voice-to-Text"};
             JComboBox<String> typingStyle = new JComboBox<>(styles);
             typingStyle.setName("TypingStyle");
@@ -42,7 +33,7 @@ public class CustomiseTypists extends JPanel {
             JComboBox<String> keyboardType = new JComboBox<>(keyboardTypes);
             keyboardType.setName("KeyboardType");
             typistChildPanel.add(keyboardType);
-            JTextField symbol = new JTextField(10);
+            JTextField symbol = new JTextField("Symbol", 10);
             keyboardType.setName("Symbol");
             typistChildPanel.add(symbol);
             JButton clrPickerReq = new JButton("Pick a typist colour");
@@ -54,7 +45,7 @@ public class CustomiseTypists extends JPanel {
             typistChildPanel.add(energyDrink);
             JCheckBox ncHeadphones = new JCheckBox("Noise-cancelling headphones");
             typistChildPanel.add(ncHeadphones);
-            TypistRowData rowofData = new TypistRowData(typingStyle, keyboardType, symbol, wristSupport, energyDrink, ncHeadphones);
+            TypistRowData rowofData = new TypistRowData(name, typingStyle, keyboardType, symbol, wristSupport, energyDrink, ncHeadphones);
             typistData.add(rowofData);
             clrPickerReq.addActionListener(e -> {
                 JColorChooser clrChooser = new JColorChooser();
@@ -70,29 +61,10 @@ public class CustomiseTypists extends JPanel {
 
         contToGame.addActionListener(e -> {
             CardLayout layout = (CardLayout) app.getLayout();
-            createTypists(typistPanels);
-            
-            // racePage.passData()
-            //layout.show(app, "RacePage");
+            racePage.passData(gameInfo, typistData);
+            layout.show(app, "RacePage");
     });
 
 }
 
-public void createTypists(List<JPanel> panels){
-    for (int i=0; i<panels.size(); i++){
-        Component[] c = panels.get(i).getComponents();
-        for (int j=0; j<c.length; j++){
-            //Typist t = new Typist();
-            if (c[j] instanceof JComboBox && "TypingStyle".equals(c[i].getName())){
-                // deal
-            }
-            else if (c[j] instanceof JComboBox && "KeyboardType".equals(c[i].getName())){
-                // deal
-            }
-            else if (c[j] instanceof JTextField && "Symbol".equals(c[i].getName())){
-                // deal
-            }
-        }
-    }
-}
 }

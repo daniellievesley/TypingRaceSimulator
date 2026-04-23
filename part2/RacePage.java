@@ -1,13 +1,14 @@
 package part2;
-import java.awt.*;
+import java.util.List;
 import javax.swing.*;
 
 public class RacePage extends JPanel {
     public RacePage(JPanel mainPanel){
         JLabel label = new JLabel("RACE PAGE", SwingConstants.CENTER);
         JButton finishBtn = new JButton("Finish race");
-        
-        mainPanel.add(label, BorderLayout.CENTER);
-        mainPanel.add(finishBtn, BorderLayout.SOUTH);
+    }
+
+    public void passData (GameData gameinfo, List<TypistRowData> typistData){
+        System.out.println("Data received");
     }
 }

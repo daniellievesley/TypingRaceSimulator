@@ -26,6 +26,7 @@ public class CustomiseTypists extends JPanel {
         this.caffeine = caffeine;
         this.night = night;
         List<JPanel> typistPanels = new ArrayList<>();
+        List<TypistRowData> typistData = new ArrayList<>();
         for (int i=1; i<=seats; i++){
             JPanel typistChildPanel = new JPanel();
             JLabel typistLabel = new JLabel("Typist " + i);
@@ -53,10 +54,13 @@ public class CustomiseTypists extends JPanel {
             typistChildPanel.add(energyDrink);
             JCheckBox ncHeadphones = new JCheckBox("Noise-cancelling headphones");
             typistChildPanel.add(ncHeadphones);
+            TypistRowData rowofData = new TypistRowData(typingStyle, keyboardType, symbol, wristSupport, energyDrink, ncHeadphones);
+            typistData.add(rowofData);
             clrPickerReq.addActionListener(e -> {
                 JColorChooser clrChooser = new JColorChooser();
                 Color colorTypist = JColorChooser.showDialog(null, "Pick a typist colour", Color.blue);
                 System.out.println(colorTypist);
+                rowofData.updateColour(colorTypist);
                 typistChildPanel.add(clrChooser);
             });
 

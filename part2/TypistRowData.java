@@ -10,9 +10,13 @@ public class TypistRowData {
     private JCheckBox wrist;
     private JCheckBox energyDrink;
     private JCheckBox headphones;
+    private JTextField name;
 
     public JComboBox<String> getTypingStyle(){
         return this.typingStyle;
+    }
+    public JTextField getTypistName(){
+        return this.name;
     }
 
     public JComboBox<String> getKeyboardType(){
@@ -41,7 +45,8 @@ public class TypistRowData {
 
 
 
-    TypistRowData(JComboBox<String> typingStyle, JComboBox<String> keyboardType, JTextField symbol, JCheckBox wrist, JCheckBox energyDrink, JCheckBox headphones){
+    TypistRowData(JTextField name, JComboBox<String> typingStyle, JComboBox<String> keyboardType, JTextField symbol, JCheckBox wrist, JCheckBox energyDrink, JCheckBox headphones){
+        this.name = name;
         this.typingStyle = typingStyle;
         this.keyboardType = keyboardType;
         this.symbol = symbol;

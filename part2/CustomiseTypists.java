@@ -73,7 +73,15 @@ public void createTypists(List<JPanel> panels){
     for (int i=0; i<panels.size(); i++){
         Component[] c = panels.get(i).getComponents();
         for (int j=0; j<c.length; j++){
-            ()
+            if (c[j] instanceof JComboBox && "TypingStyle".equals(c[i].getName())){
+                // deal
+            }
+            else if (c[j] instanceof JComboBox && "KeyboardType".equals(c[i].getName())){
+                // deal
+            }
+            else if (c[j] instanceof JTextField && "Symbol".equals(c[i].getName())){
+                // deal
+            }
         }
     }
 }

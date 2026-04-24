@@ -69,7 +69,7 @@ public class RacePage extends JPanel {
 
             
             Typist t = new Typist(d.getSymbol().getText().trim().charAt(0), d.getTypistName().getText().trim(), acc, mistypeBase, duration, d.getEnergy().isSelected());
-            game.addTypist(t, i);
+            game.addTypist(t, i+1);
         }
 
 

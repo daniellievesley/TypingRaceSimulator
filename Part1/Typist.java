@@ -5,6 +5,7 @@
  * @version 25/03/2026
  */
 
+package part1;
 import java.text.DecimalFormat;
 public class Typist
 {
@@ -16,6 +17,9 @@ public class Typist
     private double accuracy;
     private boolean justMistyped;
     final private double originalAccuracy;
+    final private double MISTYPE_BASE;
+    final private int BURNOUT_DURATION;
+    final private boolean NOISE_CANCELLING;
 
     // Fields of class Typist
     // Hint: you will need six fields. Think carefully about their types.
@@ -36,7 +40,7 @@ public class Typist
      * @param typistName    the name of the typist (e.g. "TURBOFINGERS")
      * @param typistAccuracy the typist's accuracy rating, between 0.0 and 1.0
      */
-    public Typist(char typistSymbol, String typistName, double typistAccuracy)
+    public Typist(char typistSymbol, String typistName, double typistAccuracy, double mistype, int duration, boolean headphones)
     {
         this.symbol = typistSymbol;
         this.name = typistName;
@@ -45,6 +49,9 @@ public class Typist
         this.burnOut = false;
         this.currentProgress = 0;
         this.justMistyped = false;
+        this.MISTYPE_BASE = mistype;
+        this.BURNOUT_DURATION = duration;
+        this.NOISE_CANCELLING = headphones;
     }
 
 
@@ -229,6 +236,18 @@ public class Typist
 
     public double getoriginalAccuracy(){
         return originalAccuracy;
+    }
+
+    public double getMistypeBase(){
+        return this.MISTYPE_BASE;
+    }
+
+    public int getburnOutDuration(){
+        return this.BURNOUT_DURATION;
+    }
+
+    public boolean getHeadphones(){
+        return this.NOISE_CANCELLING;
     }
 
 }

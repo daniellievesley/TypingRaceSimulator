@@ -18,9 +18,7 @@ public class TypingRace
 {
     private final int PASSAGE_LENGTH;   // Total characters in the passage to type
     private final String PASSAGE; // actual passage 
-    private Typist seat1Typist;
-    private Typist seat2Typist;
-    private Typist seat3Typist;
+    private Typist[] typists; // typist array 
     private final GameData importedSettings; 
     // Accuracy thresholds for mistype and burnout events
     // (Ty tuned these values "by feel". They may need adjustment.)
@@ -40,10 +38,8 @@ public class TypingRace
     {
         this.PASSAGE = passage;
         this.PASSAGE_LENGTH = (this.PASSAGE).length();
-        seat1Typist = null;
-        seat2Typist = null;
-        seat3Typist = null;
         this.importedSettings = info;
+        this.typists = new Typist[importedSettings.getSeats()]; // setting array for max size of typists provided 
         if (importedSettings.getAuto()){
             SLIDE_BACK_AMOUNT = 1;
         }
@@ -61,17 +57,11 @@ public class TypingRace
      */
     public void addTypist(Typist theTypist, int seatNumber)
     {
-        if (seatNumber == 1)
-        {
-            seat1Typist = theTypist;
+        if (this.typists[seatNumber-1]==null){
+            this.typists[seatNumber-1]=theTypist;
         }
-        else if (seatNumber == 2)
-        {
-            seat2Typist = theTypist;
-        }
-        else if (seatNumber == 3)
-        {
-            seat3Typist = theTypist;
+        else if (this.typists[seatNumber-1]!=null){
+            System.out.println("Seat taken");
         }
         else
         {

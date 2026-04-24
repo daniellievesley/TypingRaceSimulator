@@ -268,13 +268,10 @@ public class TypingRace
             // update accuracy with new accuracy 
             for (int i=0; i<typists.length; i++){
                 typists[i].setAccuracy(typists[i].getAccuracy());
-                }
             }
             return true;
-
         }
-        else
-        {
+        else {
             return false;
         }
     }
@@ -292,14 +289,10 @@ public class TypingRace
         multiplePrint('=', PASSAGE_LENGTH + 3);
         System.out.println();
 
-        printSeat(seat1Typist);
-        System.out.println();
-
-        printSeat(seat2Typist);
-        System.out.println();
-
-        printSeat(seat3Typist);
-        System.out.println();
+        for (int i=0; i<typists.length; i++){
+            printSeat(typists[i]);
+            System.out.println();
+        }
 
         multiplePrint('=', PASSAGE_LENGTH + 3);
         System.out.println();

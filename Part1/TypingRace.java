@@ -27,6 +27,7 @@ public class TypingRace
     // private static final double MISTYPE_BASE_CHANCE = 0.3;
     private final int  SLIDE_BACK_AMOUNT;
     // private static final int    BURNOUT_DURATION     = 3;
+    private int turns = 0;
 
     /**
      * Constructor for objects of class TypingRace.
@@ -98,6 +99,7 @@ public class TypingRace
 
         while (!finished)
         {
+            increaseTurn();
             if (seat1Typist.getAccuracy()==0.0&&seat2Typist.getAccuracy()==0.0&&seat3Typist.getAccuracy()==0.0){
                 Random r = new Random();
                 int index = r.nextInt(1,4);
@@ -153,6 +155,10 @@ public class TypingRace
      *
      * @param theTypist the typist to advance
      */
+
+    private void increaseTurn(){
+        this.turns++;
+    }
     private void advanceTypist(Typist theTypist)
     {
         if (theTypist.isBurntOut())

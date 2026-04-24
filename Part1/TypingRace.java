@@ -159,8 +159,14 @@ public class TypingRace
     private void increaseTurn(){
         this.turns++;
     }
+
+    private int getTurns(){
+        return this.turns;
+    }
     private void advanceTypist(Typist theTypist)
     {
+
+        double multiplierCaffeine = 1.0;
         if (theTypist.isBurntOut())
         {
             // Recovering from burnout — skip this turn
@@ -168,23 +174,32 @@ public class TypingRace
             return;
         }
 
+        if (importedSettings.getCaffeine() && getTurns()<=10){
+            multiplierCaffeine=multiplierCaffeine*1.5;
+        }
+        else if (importedSettings.getCaffeine()&&getTurns()>10){
+            multiplierCaffeine=multiplierCaffeine*0.75;
+        }
+
         if (theTypist.getHeadphones()){
             if ((theTypist.getProgress()/PASSAGE_LENGTH)>0.5){
                 // Attempt to type a character
+
+
                 if (Math.random() < theTypist.getAccuracy()*0.7)
                 {
                     theTypist.typeCharacter();
                 }
 
                 // Mistype check — the probability should reflect the typist's accuracy
-                if (Math.random() < (1.0-theTypist.getAccuracy()*0.7) * theTypist.getMistypeBase())
+                if (Math.random() < (1.0-theTypist.getAccuracy()*0.7*multiplierCaffeine) * theTypist.getMistypeBase())
                 {
                 theTypist.slideBack(SLIDE_BACK_AMOUNT);
                 }
 
                 // Burnout check — pushing too hard increases burnout risk
                 // (probability scales with accuracy squared, capped at ~0.08)
-                if (Math.random() < 0.08 * (theTypist.getAccuracy()*0.7) * (theTypist.getAccuracy()*0.7))
+                if (Math.random() < 0.08 * (theTypist.getAccuracy()*0.7*multiplierCaffeine) * (theTypist.getAccuracy()*multiplierCaffeine*0.7))
                 {
                     theTypist.burnOut(theTypist.getburnOutDuration());
                 }   
@@ -192,20 +207,20 @@ public class TypingRace
 
             if ((theTypist.getProgress()/PASSAGE_LENGTH)<=0.5){
                 // Attempt to type a character
-                if (Math.random() < theTypist.getAccuracy()*1.3)
+                if (Math.random() < theTypist.getAccuracy()*1.3*multiplierCaffeine)
                 {
                     theTypist.typeCharacter();
                 }
 
                 // Mistype check — the probability should reflect the typist's accuracy
-                if (Math.random() < (1.0-theTypist.getAccuracy()*1.3) * theTypist.getMistypeBase())
+                if (Math.random() < (1.0-theTypist.getAccuracy()*1.3*multiplierCaffeine) * theTypist.getMistypeBase())
                 {
                 theTypist.slideBack(SLIDE_BACK_AMOUNT);
                 }
 
                 // Burnout check — pushing too hard increases burnout risk
                 // (probability scales with accuracy squared, capped at ~0.08)
-                if (Math.random() < 0.08 * (theTypist.getAccuracy()*1.3) * (theTypist.getAccuracy()*1.3))
+                if (Math.random() < 0.08 * (theTypist.getAccuracy()*1.3*multiplierCaffeine) * (theTypist.getAccuracy()*1.3*multiplierCaffeine))
                 {
                     theTypist.burnOut(theTypist.getburnOutDuration());
                 }   
@@ -214,20 +229,20 @@ public class TypingRace
     else {
 
         // Attempt to type a character
-        if (Math.random() < theTypist.getAccuracy())
+        if (Math.random() < theTypist.getAccuracy()*multiplierCaffeine)
         {
             theTypist.typeCharacter();
         }
 
         // Mistype check — the probability should reflect the typist's accuracy
-        if (Math.random() < (1.0-theTypist.getAccuracy()) * theTypist.getMistypeBase())
+        if (Math.random() < (1.0-theTypist.getAccuracy()*multiplierCaffeine) * theTypist.getMistypeBase())
         {
             theTypist.slideBack(SLIDE_BACK_AMOUNT);
         }
 
         // Burnout check — pushing too hard increases burnout risk
         // (probability scales with accuracy squared, capped at ~0.08)
-        if (Math.random() < 0.08 * theTypist.getAccuracy() * theTypist.getAccuracy())
+        if (Math.random() < 0.08 * theTypist.getAccuracy()*multiplierCaffeine * theTypist.getAccuracy()*multiplierCaffeine)
         {
             theTypist.burnOut(theTypist.getburnOutDuration());
         }

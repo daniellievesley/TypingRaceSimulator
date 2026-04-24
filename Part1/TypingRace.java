@@ -83,32 +83,34 @@ public class TypingRace
 
         // Reset all typists to the start of the passage
         // (Ty was in a hurry here)
-        seat1Typist.resetToStart();
-        seat2Typist.resetToStart();
-        seat3Typist.resetToStart();
+        for (int i=0; i<typists.length; i++){
+            typists[i].resetToStart();
+        }
 
         while (!finished)
         {
             increaseTurn();
-            if (seat1Typist.getAccuracy()==0.0&&seat2Typist.getAccuracy()==0.0&&seat3Typist.getAccuracy()==0.0){
+            int accuracyIsZero = 0;
+            for (int i=0; i<typists.length; i++){
+                if (typists[i].getAccuracy()==0){
+                    accuracyIsZero++;
+                }
+            }
+
+            if (accuracyIsZero==typists.length){
                 Random r = new Random();
-                int index = r.nextInt(1,4);
-                Typist toForce = seat1Typist;
-                if (index==2){
-                    toForce = seat2Typist;
-                }
-                else if (index==3){
-                    toForce = seat3Typist;
-                }
+                int index = r.nextInt(1,typists.length);
+                Typist toForce = typists[index+1];
                 if(!(toForce.isBurntOut())){
                     toForce.typeCharacter();
                 }
             }
+    
             else{
             // Advance each typist by one turn
-            advanceTypist(seat1Typist);
-            advanceTypist(seat2Typist);
-            advanceTypist(seat3Typist);
+            for (int i=0; i<typists.length; i++){
+                advanceTypist(typists[i]);
+            }
             }
 
             // Print the current state of the race
@@ -118,9 +120,11 @@ public class TypingRace
 
 
             // Check if any typist has finished the passage
-            if ( raceFinishedBy(seat1Typist) || raceFinishedBy(seat2Typist) || raceFinishedBy(seat3Typist) )
-            {
-                finished = true;
+            for (int i=0; i<typists.length; i++){
+                if (raceFinishedBy(typists[i])){
+                    finished = true;
+                    continue;
+                }
             }
 
             // Wait 200ms between turns so the animation is visible
@@ -262,9 +266,10 @@ public class TypingRace
             System.out.println("  Final accuracy: " + theTypist.getAccuracy() + " (decreased from " + theTypist.getoriginalAccuracy() +")");
             }
             // update accuracy with new accuracy 
-            seat1Typist.setAccuracy(seat1Typist.getAccuracy());
-            seat2Typist.setAccuracy(seat2Typist.getAccuracy());
-            seat3Typist.setAccuracy(seat3Typist.getAccuracy());
+            for (int i=0; i<typists.length; i++){
+                typists[i].setAccuracy(typists[i].getAccuracy());
+                }
+            }
             return true;
 
         }

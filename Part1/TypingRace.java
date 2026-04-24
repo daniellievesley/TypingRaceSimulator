@@ -1,5 +1,7 @@
+package part1;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
+import part2.GameData;
 
 /**
  * A typing race simulation. Three typists race to complete a passage of text,
@@ -15,14 +17,16 @@ import java.util.concurrent.TimeUnit;
 public class TypingRace
 {
     private final int PASSAGE_LENGTH;   // Total characters in the passage to type
+    private final String PASSAGE; // actual passage 
     private Typist seat1Typist;
     private Typist seat2Typist;
     private Typist seat3Typist;
+    private final GameData importedSettings; 
     // Accuracy thresholds for mistype and burnout events
     // (Ty tuned these values "by feel". They may need adjustment.)
-    private static final double MISTYPE_BASE_CHANCE = 0.3;
-    private static final int    SLIDE_BACK_AMOUNT   = 2;
-    private static final int    BURNOUT_DURATION     = 3;
+    // private static final double MISTYPE_BASE_CHANCE = 0.3;
+    private final int  SLIDE_BACK_AMOUNT;
+    // private static final int    BURNOUT_DURATION     = 3;
 
     /**
      * Constructor for objects of class TypingRace.
@@ -31,12 +35,20 @@ public class TypingRace
      *
      * @param PASSAGE_LENGTH the number of characters in the passage to type
      */
-    public TypingRace(int PASSAGE_LENGTH)
+    public TypingRace(String passage, GameData info)
     {
-        this.PASSAGE_LENGTH = PASSAGE_LENGTH;
+        this.PASSAGE = passage;
+        this.PASSAGE_LENGTH = (this.PASSAGE).length();
         seat1Typist = null;
         seat2Typist = null;
         seat3Typist = null;
+        this.importedSettings = info;
+        if (importedSettings.getAuto()){
+            SLIDE_BACK_AMOUNT = 1;
+        }
+        else{
+        SLIDE_BACK_AMOUNT   = 2;
+        }
         
     }
 
@@ -150,6 +162,51 @@ public class TypingRace
             return;
         }
 
+        if (theTypist.getHeadphones()){
+            if ((theTypist.getProgress()/PASSAGE_LENGTH)>0.5){
+                // Attempt to type a character
+                if (Math.random() < theTypist.getAccuracy()*0.7)
+                {
+                    theTypist.typeCharacter();
+                }
+
+                // Mistype check — the probability should reflect the typist's accuracy
+                if (Math.random() < (1.0-theTypist.getAccuracy()*0.7) * theTypist.getMistypeBase())
+                {
+                theTypist.slideBack(SLIDE_BACK_AMOUNT);
+                }
+
+                // Burnout check — pushing too hard increases burnout risk
+                // (probability scales with accuracy squared, capped at ~0.08)
+                if (Math.random() < 0.08 * (theTypist.getAccuracy()*0.7) * (theTypist.getAccuracy()*0.7))
+                {
+                    theTypist.burnOut(theTypist.getburnOutDuration());
+                }   
+            }
+
+            if ((theTypist.getProgress()/PASSAGE_LENGTH)<=0.5){
+                // Attempt to type a character
+                if (Math.random() < theTypist.getAccuracy()*1.3)
+                {
+                    theTypist.typeCharacter();
+                }
+
+                // Mistype check — the probability should reflect the typist's accuracy
+                if (Math.random() < (1.0-theTypist.getAccuracy()*1.3) * theTypist.getMistypeBase())
+                {
+                theTypist.slideBack(SLIDE_BACK_AMOUNT);
+                }
+
+                // Burnout check — pushing too hard increases burnout risk
+                // (probability scales with accuracy squared, capped at ~0.08)
+                if (Math.random() < 0.08 * (theTypist.getAccuracy()*1.3) * (theTypist.getAccuracy()*1.3))
+                {
+                    theTypist.burnOut(theTypist.getburnOutDuration());
+                }   
+            }
+    }
+    else {
+
         // Attempt to type a character
         if (Math.random() < theTypist.getAccuracy())
         {
@@ -157,18 +214,19 @@ public class TypingRace
         }
 
         // Mistype check — the probability should reflect the typist's accuracy
-        if (Math.random() < (1.0-theTypist.getAccuracy()) * MISTYPE_BASE_CHANCE)
+        if (Math.random() < (1.0-theTypist.getAccuracy()) * theTypist.getMistypeBase())
         {
             theTypist.slideBack(SLIDE_BACK_AMOUNT);
         }
 
         // Burnout check — pushing too hard increases burnout risk
-        // (probability scales with accuracy squared, capped at ~0.05)
+        // (probability scales with accuracy squared, capped at ~0.08)
         if (Math.random() < 0.08 * theTypist.getAccuracy() * theTypist.getAccuracy())
         {
-            theTypist.burnOut(BURNOUT_DURATION);
+            theTypist.burnOut(theTypist.getburnOutDuration());
         }
     }
+}
 
     /**
      * Returns true if the given typist has completed the full passage.
@@ -286,6 +344,7 @@ public class TypingRace
         }
     }
 
+    
     /**
      * Prints a character a given number of times.
      *

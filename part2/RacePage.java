@@ -1,9 +1,6 @@
 package part2;
 import java.awt.BorderLayout;
 import java.util.List;
-import java.util.concurrent.Flow;
-import java.awt.FlowLayout;
-
 import javax.swing.*;
 import part1.TypingRace;
 import part1.Typist;
@@ -33,6 +30,9 @@ public class RacePage extends JPanel {
             passagetoSend = gameinfo.getPassage();
             passageLength = gameinfo.getPassage().length();
         }
+
+        removeAll();
+        setLayout(new BorderLayout());
 
         TypingRace game = new TypingRace(passagetoSend, gameinfo);
         
@@ -81,6 +81,18 @@ public class RacePage extends JPanel {
         JTextArea passageTxt = new JTextArea(passagetoSend);
         add(new JScrollPane(passageTxt), BorderLayout.NORTH);
 
+        // area to display races (rows)
+        JPanel typistLanes = new JPanel();
+        typistLanes.setLayout(new BoxLayout(typistLanes, BoxLayout.Y_AXIS));
+        add(typistLanes, BorderLayout.WEST);
+        for (int i=0; i<typistData.size(); i++){
+            JPanel row = new JPanel(new BorderLayout());
+            JLabel typistSym = new JLabel(typistData.get(i).getSymbol().getText());
+            row.add(typistSym, BorderLayout.WEST);
+            JTextPane passage = new JTextPane();
+            passage.setText(passagetoSend);
+            row.add(passage, BorderLayout.CENTER);
+        }
 
     }
         

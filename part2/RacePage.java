@@ -39,7 +39,7 @@ public class RacePage extends JPanel {
         removeAll();
         setLayout(new BorderLayout());
 
-        TypingRace game = new TypingRace(passagetoSend, gameinfo);
+        TypingRace game = new TypingRace(passagetoSend, gameinfo, this);
         this.game = game;
         
         for (int i=0; i<typistData.size(); i++){
@@ -121,6 +121,13 @@ public class RacePage extends JPanel {
         displayProgress();
         t.start();
 
+    }
+
+    public void printWinner(String winnerText){
+        JPanel winnerDisplay = new JPanel();
+        add(winnerDisplay, BorderLayout.SOUTH);
+        JLabel texttoShow = new JLabel(winnerText);
+        winnerDisplay.add(texttoShow);
     }
         
     public void displayProgress(){

@@ -1,6 +1,9 @@
 package part2;
 import java.awt.BorderLayout;
 import java.util.List;
+import java.util.concurrent.Flow;
+import java.awt.FlowLayout;
+
 import javax.swing.*;
 import part1.TypingRace;
 import part1.Typist;
@@ -74,9 +77,10 @@ public class RacePage extends JPanel {
             game.addTypist(t, i+1);
         }
 
-        setLayout(new BorderLayout());
-        JLabel passageText = new JLabel(passagetoSend);
-        add(passageText);
+        // area to display passage 
+        JTextArea passageTxt = new JTextArea(passagetoSend);
+        add(new JScrollPane(passageTxt), BorderLayout.NORTH);
+
 
     }
         

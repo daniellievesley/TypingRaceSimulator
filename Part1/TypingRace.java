@@ -1,6 +1,7 @@
 package part1;
 import java.util.Random;
 import part2.GameData;
+import part2.RacePage;
 
 /**
  * A typing race simulation. Three typists race to complete a passage of text,
@@ -25,6 +26,7 @@ public class TypingRace
     private final int  SLIDE_BACK_AMOUNT;
     // private static final int    BURNOUT_DURATION     = 3;
     private int turns = 0;
+    private final RacePage display;
 
     /**
      * Constructor for objects of class TypingRace.
@@ -33,7 +35,7 @@ public class TypingRace
      *
      * @param PASSAGE_LENGTH the number of characters in the passage to type
      */
-    public TypingRace(String passage, GameData info)
+    public TypingRace(String passage, GameData info, RacePage display)
     {
         this.PASSAGE = passage;
         this.PASSAGE_LENGTH = (this.PASSAGE).length();
@@ -45,6 +47,7 @@ public class TypingRace
         else{
         SLIDE_BACK_AMOUNT   = 2;
         }
+        this.display = display;
         
     }
 
@@ -254,13 +257,16 @@ public class TypingRace
             System.out.println("  And the winner is... " + theTypist.getName() + "!");
             theTypist.setAccuracy(theTypist.getAccuracy()+0.05);
             if (theTypist.getAccuracy()>theTypist.getoriginalAccuracy()){
-                System.out.println("  Final accuracy: " + theTypist.getAccuracy() + " (improved from " + theTypist.getoriginalAccuracy() +")");
+                display.printWinner("  Final accuracy: " + theTypist.getAccuracy() + " (improved from " + theTypist.getoriginalAccuracy() +")");
+                System.out.println("Call made");
             }
             else if (theTypist.getAccuracy()==theTypist.getoriginalAccuracy()) {
-            System.out.println("  Final accuracy: " + theTypist.getAccuracy() + " (remained same from " + theTypist.getoriginalAccuracy() +")");
+                display.printWinner("  Final accuracy: " + theTypist.getAccuracy() + " (remained same from " + theTypist.getoriginalAccuracy() +")");
+                System.out.println("Call made");
             }
             else {
-            System.out.println("  Final accuracy: " + theTypist.getAccuracy() + " (decreased from " + theTypist.getoriginalAccuracy() +")");
+                display.printWinner("  Final accuracy: " + theTypist.getAccuracy() + " (decreased from " + theTypist.getoriginalAccuracy() +")");
+                System.out.println("Call made");
             }
             // update accuracy with new accuracy 
             for (int i=0; i<typists.length; i++){

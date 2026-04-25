@@ -1,6 +1,5 @@
 package part1;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 import part2.GameData;
 
 /**
@@ -77,20 +76,24 @@ public class TypingRace
      * Note from Ty: "I didn't bother printing the winner at the end,
      * you can probably figure that out yourself."
      */
-    public void startRace()
-    {
-        boolean finished = false;
 
-        // Reset all typists to the start of the passage
-        // (Ty was in a hurry here)
+    public void resetAll() {
         for (int i=0; i<typists.length; i++){
             typists[i].resetToStart();
         }
+    }
 
-        while (!finished)
-        {
-            increaseTurn();
-            int accuracyIsZero = 0;
+    public Typist[] getTypists(){
+        return this.typists;
+    }
+
+    public String getPassage(){
+        return this.PASSAGE;
+    }
+
+    public void startTurn(){
+        increaseTurn();
+        int accuracyIsZero = 0;
             for (int i=0; i<typists.length; i++){
                 if (typists[i].getAccuracy()==0){
                     accuracyIsZero++;
@@ -105,7 +108,7 @@ public class TypingRace
                     toForce.typeCharacter();
                 }
             }
-    
+
             else{
             // Advance each typist by one turn
             for (int i=0; i<typists.length; i++){
@@ -113,26 +116,20 @@ public class TypingRace
             }
             }
 
-            // Print the current state of the race
-            printRace();
+    }
 
-            
-
-
-            // Check if any typist has finished the passage
-            for (int i=0; i<typists.length; i++){
+    public boolean isFinished(){
+        for (int i=0; i<typists.length; i++){
                 if (raceFinishedBy(typists[i])){
-                    finished = true;
-                    continue;
+                    return true;
                 }
             }
-
-            // Wait 200ms between turns so the animation is visible
-            try {
-                TimeUnit.MILLISECONDS.sleep(200);
-            } catch (Exception e) {}
-        }
+        return false;
     }
+
+
+
+    
 
         // TODO (Task 2a): Print the winner's name here
 

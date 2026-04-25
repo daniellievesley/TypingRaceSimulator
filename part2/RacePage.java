@@ -1,10 +1,12 @@
 package part2;
+import java.awt.BorderLayout;
 import java.util.List;
 import javax.swing.*;
 import part1.TypingRace;
 import part1.Typist;
 
 public class RacePage extends JPanel {
+
     public RacePage(JPanel mainPanel){
         JLabel label = new JLabel("RACE PAGE", SwingConstants.CENTER);
         JButton finishBtn = new JButton("Finish race");
@@ -72,7 +74,11 @@ public class RacePage extends JPanel {
             game.addTypist(t, i+1);
         }
 
+        setLayout(new BorderLayout());
+        JLabel passageText = new JLabel(passagetoSend);
+        add(passageText);
 
-        
     }
+        
+
 }

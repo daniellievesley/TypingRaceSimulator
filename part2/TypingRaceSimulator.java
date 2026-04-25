@@ -1,7 +1,6 @@
 package part2;
 import java.awt.*;
 import javax.swing.*;
-import part1.Typist;
 
 public class TypingRaceSimulator {
     public static void main(String[] args){

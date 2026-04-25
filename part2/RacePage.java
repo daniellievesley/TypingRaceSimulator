@@ -90,8 +90,10 @@ public class RacePage extends JPanel {
             JLabel typistSym = new JLabel(typistData.get(i).getSymbol().getText());
             row.add(typistSym, BorderLayout.WEST);
             JTextPane passage = new JTextPane();
+            passage.setEditable(false);
             passage.setText(passagetoSend);
             row.add(passage, BorderLayout.CENTER);
+            typistLanes.add(row);
         }
 
     }

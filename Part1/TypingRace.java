@@ -254,7 +254,8 @@ public class TypingRace
         // Typist progress can now meet or exceed passage length
         if (theTypist.getProgress() >= PASSAGE_LENGTH)
         {
-            System.out.println("  And the winner is... " + theTypist.getName() + "!");
+            display.printWinner("  And the winner is... " + theTypist.getName() + "!");
+            System.out.println("first call is made");
             theTypist.setAccuracy(theTypist.getAccuracy()+0.05);
             if (theTypist.getAccuracy()>theTypist.getoriginalAccuracy()){
                 display.printWinner("  Final accuracy: " + theTypist.getAccuracy() + " (improved from " + theTypist.getoriginalAccuracy() +")");

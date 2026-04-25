@@ -19,22 +19,19 @@ public class RacePage extends JPanel {
 
     public void passData (GameData gameinfo, List<TypistRowData> typistData){
         String passagetoSend = "The quick brown fox jumps over the lazy dog. It is often used to practice typing because it includes every letter.";
-        int passageLength = 123;
         if (gameinfo.getLen().equals("Short")){
-            passagetoSend = "The quick brown fox jumps over the lazy dog. It is often used to practice typing because it includes every letter.";
+            passagetoSend = "Mile End is a district in the London Borough of Tower Hamlets. Home to Queen Mary, University of London, Mile End was named after it's one mile location on the old Colchester road, leading from Aldgate.";
         }
         else if (gameinfo.getLen().equals("Medium")){
-            passagetoSend = "Typing is a useful skill that improves with regular practice. By focusing on accuracy first, you can build a strong foundation and gradually increase your typing speed over time.";
-            passageLength = 187;
+            passagetoSend = "Colchester Zoo is a popular attraction for those visiting or living in Essex. Frequently ranked as one of the best zoos in the United Kingdom, Colchester Zoo is full of interactive exhibits for kids, teenagers and adults! A beautfiful 60 acre site home to rhinos, giraffes, lions and even pygmy hippos.";
         }
         else if (gameinfo.getLen().equals("Long")){
-            passagetoSend = "Typing is an essential skill in today’s digital world, helping people communicate quickly and efficiently. With consistent practice and proper technique, you can improve both speed and accuracy, allowing your thoughts to flow more naturally as you type.";
-            passageLength= 262;
+            passagetoSend = "Malta is an island nation in Europe. With the smallest population in the European Union (EU), it packs a punch! Here, you will find many gorgeous beaches, including those at St Paul's Bay, perhaps at the Blue Lagoon or in Gozo. Malta is a former British colony and therefore drives on the left hand side of the road. However, since joining the EU it now uses the euro (€), rather than the pound, as of 2007.";
         }
         else if (gameinfo.getLen().equals("Custom")){
             passagetoSend = gameinfo.getPassage();
-            passageLength = gameinfo.getPassage().length();
         }
+        int passageLength = passagetoSend.length();
 
         removeAll();
         setLayout(new BorderLayout());
@@ -124,10 +121,13 @@ public class RacePage extends JPanel {
     }
 
     public void printWinner(String winnerText){
+        System.out.println("Winner call received ");
         JPanel winnerDisplay = new JPanel();
         add(winnerDisplay, BorderLayout.SOUTH);
         JLabel texttoShow = new JLabel(winnerText);
         winnerDisplay.add(texttoShow);
+        revalidate();
+        repaint();
     }
         
     public void displayProgress(){

@@ -1,11 +1,16 @@
 package part2;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 import part1.TypingRace;
 import part1.Typist;
 
 public class RacePage extends JPanel {
+    TypingRace game;
+    List<JLabel>passageProgresses;
+    Timer t;
 
     public RacePage(JPanel mainPanel){
         JLabel label = new JLabel("RACE PAGE", SwingConstants.CENTER);
@@ -35,6 +40,7 @@ public class RacePage extends JPanel {
         setLayout(new BorderLayout());
 
         TypingRace game = new TypingRace(passagetoSend, gameinfo);
+        this.game = game;
         
         for (int i=0; i<typistData.size(); i++){
             TypistRowData d = typistData.get(i);
@@ -49,7 +55,7 @@ public class RacePage extends JPanel {
                 acc=acc-0.2; // accuracy decreased
             }
 
-            double mistypeBase = 0.3;
+            double mistypeBase = 0.1;
             if (d.getKeyboardType().getSelectedItem().equals("Mechanical")){
                 mistypeBase=mistypeBase*0.9; // mistype chance decreased
             }
@@ -83,20 +89,55 @@ public class RacePage extends JPanel {
 
         // area to display races (rows)
         JPanel typistLanes = new JPanel();
+        setBorder(BorderFactory.createLineBorder(Color.BLACK));
         typistLanes.setLayout(new BoxLayout(typistLanes, BoxLayout.Y_AXIS));
-        add(typistLanes, BorderLayout.WEST);
+        add(typistLanes, BorderLayout.CENTER);
+        List<JLabel>passageProgresses=new ArrayList<>();
+        this.passageProgresses=passageProgresses;
         for (int i=0; i<typistData.size(); i++){
             JPanel row = new JPanel(new BorderLayout());
-            JLabel typistSym = new JLabel(typistData.get(i).getSymbol().getText());
+            row.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            JLabel typistSym = new JLabel(typistData.get(i).getSymbol().getText() + "     ");
             row.add(typistSym, BorderLayout.WEST);
-            JTextPane passage = new JTextPane();
-            passage.setEditable(false);
+            JLabel passage = new JLabel();
+            passageProgresses.add(passage);
+            //passage.setEditable(false);
             passage.setText(passagetoSend);
             row.add(passage, BorderLayout.CENTER);
             typistLanes.add(row);
         }
 
+        game.resetAll();
+        
+        Timer t = new Timer(120, e -> {
+            game.startTurn();
+            displayProgress();
+            if (game.isFinished()){
+                ((Timer) e.getSource()).stop();
+                //showResults();
+            }
+        });
+
+        displayProgress();
+        t.start();
+
     }
         
+    public void displayProgress(){
+        Typist[] typistsInGame = game.getTypists();
+        for (int i=0; i<game.getTypists().length; i++){
+            String passage = game.getPassage();
+            int individualProgress = typistsInGame[i].getProgress();
+            if (individualProgress>=passage.length()){
+                individualProgress=passage.length()-1;
+            }
+            String before = passage.substring(0, individualProgress);
+            String current = passage.substring(individualProgress, individualProgress+1);
+            String after = passage.substring(individualProgress+1, passage.length());
+            String toInsert = "<html> <span style='background-color: green'>" + before + "</span> <span style='background-color: yellow'>" + current + "</span>" + after + "</html>";
+            passageProgresses.get(i).setText(toInsert);
+
+        }
+    }
 
 }

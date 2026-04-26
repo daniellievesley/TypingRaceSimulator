@@ -130,8 +130,14 @@ public class RacePage extends JPanel {
         });
     }
 
-    public void addUpdate(String updatetoDisplay){
-        if
+    public void showTypistUpdate(String updatetoDisplay, int identifier){
+        for (int i=0; i<statusUpdates.size(); i++){
+            if (identifier==i){
+                statusUpdates.get(i).removeAll();
+                statusUpdates.get(i).setText(updatetoDisplay);
+                return;
+            }
+        }
     }
 
 

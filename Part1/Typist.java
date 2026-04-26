@@ -6,6 +6,7 @@
  */
 
 package part1;
+import java.awt.Color;
 import java.text.DecimalFormat;
 public class Typist
 {
@@ -20,6 +21,7 @@ public class Typist
     final private double MISTYPE_BASE;
     final private int BURNOUT_DURATION;
     final private boolean NOISE_CANCELLING;
+    final private Color colour;
 
     // Fields of class Typist
     // Hint: you will need six fields. Think carefully about their types.
@@ -40,7 +42,7 @@ public class Typist
      * @param typistName    the name of the typist (e.g. "TURBOFINGERS")
      * @param typistAccuracy the typist's accuracy rating, between 0.0 and 1.0
      */
-    public Typist(char typistSymbol, String typistName, double typistAccuracy, double mistype, int duration, boolean headphones)
+    public Typist(char typistSymbol, String typistName, double typistAccuracy, double mistype, int duration, boolean headphones, Color colour)
     {
         this.symbol = typistSymbol;
         this.name = typistName;
@@ -52,6 +54,7 @@ public class Typist
         this.MISTYPE_BASE = mistype;
         this.BURNOUT_DURATION = duration;
         this.NOISE_CANCELLING = headphones;
+        this.colour = colour;
     }
 
 
@@ -96,6 +99,10 @@ public class Typist
     public double getAccuracy()
     {
         return this.accuracy;
+    }
+
+    public Color getColour(){
+        return this.colour;
     }
 
     /**

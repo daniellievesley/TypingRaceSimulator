@@ -294,8 +294,8 @@ public class TypingRace
         System.out.println();
 
         for (int i=0; i<typists.length; i++){
-            printSeat(typists[i]);
-            System.out.println();
+            String toOutput = printSeat(typists[i]);
+            display.showTypistUpdate(toOutput, i);
         }
 
         multiplePrint('=', PASSAGE_LENGTH + 3);
@@ -315,44 +315,20 @@ public class TypingRace
      *
      * @param theTypist the typist whose lane to print
      */
-    private void printSeat(Typist theTypist)
+    private String printSeat(Typist theTypist)
     {
-        int spacesBefore = theTypist.getProgress();
-        int spacesAfter  = PASSAGE_LENGTH - theTypist.getProgress();
-
-        System.out.print('|');
-        multiplePrint(' ', spacesBefore);
-
-        // Always show the typist's symbol so they can be identified on screen.
-        // Append ~ when burnt out so the state is visible without hiding identity.
-        System.out.print(theTypist.getSymbol());
-        if (theTypist.isBurntOut())
-        {
-            System.out.print('~');
-            spacesAfter--; // symbol + ~ together take two characters
-        }
-
-        if (theTypist.mistypeStatus()){
-            System.out.print('<');
-            spacesAfter--;
-            theTypist.resetMistype();
-        }
-
-
-        multiplePrint(' ', spacesAfter);
-        System.out.print('|');
-        System.out.print(' ');
 
         // Print name and accuracy
         if (theTypist.isBurntOut())
         {
-            System.out.print(theTypist.getName()
+            
+            return(theTypist.getName()
                 + " (Accuracy: " + theTypist.getAccuracy() + ")"
                 + " BURNT OUT (" + theTypist.getBurnoutTurnsRemaining() + " turns)");
         }
         else
         {
-            System.out.print(theTypist.getName()
+            return(theTypist.getName()
                 + " (Accuracy: " + theTypist.getAccuracy() + ")");
         }
     }

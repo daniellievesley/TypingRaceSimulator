@@ -13,6 +13,7 @@ public class RacePage extends JPanel {
     Timer t;
     JPanel footer;
     JPanel winnerDisplay;
+    List<JLabel>statusUpdates;
 
     public RacePage(JPanel mainPanel){
         JLabel label = new JLabel("RACE PAGE", SwingConstants.CENTER);
@@ -98,14 +99,17 @@ public class RacePage extends JPanel {
         add(typistLanes, BorderLayout.CENTER);
         List<JLabel>passageProgresses=new ArrayList<>();
         this.passageProgresses=passageProgresses;
+        List<JLabel>statusUpdates=new ArrayList<>();
+        this.statusUpdates=passageProgresses;
         
         for (int i=0; i<typistData.size(); i++){
             JPanel row = new JPanel(new BorderLayout());
             row.setBorder(BorderFactory.createLineBorder(Color.BLACK));
             JLabel typistSym = new JLabel(typistData.get(i).getSymbol().getText() + "     ");
             row.add(typistSym, BorderLayout.WEST);
-            JLabel statusUpdates = new JLabel();
-            row.add(statusUpdates, BorderLayout.EAST);
+            JLabel statusUpdate = new JLabel();
+            row.add(statusUpdate, BorderLayout.EAST);
+            statusUpdates.add(statusUpdate);
             JLabel passage = new JLabel();
             passageProgresses.add(passage);
             //passage.setEditable(false);
@@ -124,6 +128,10 @@ public class RacePage extends JPanel {
             repaint();
             newRound();
         });
+    }
+
+    public void addUpdate(String updatetoDisplay){
+        if
     }
 
 

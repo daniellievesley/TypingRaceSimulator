@@ -11,6 +11,7 @@ public class RacePage extends JPanel {
     TypingRace game;
     List<JLabel>passageProgresses;
     Timer t;
+    JPanel footer;
 
     public RacePage(JPanel mainPanel){
         JLabel label = new JLabel("RACE PAGE", SwingConstants.CENTER);
@@ -35,6 +36,10 @@ public class RacePage extends JPanel {
 
         removeAll();
         setLayout(new BorderLayout());
+
+        footer = new JPanel();
+        footer.setLayout(new BoxLayout(footer, BoxLayout.Y_AXIS));
+        add(footer, BorderLayout.SOUTH);
 
         TypingRace game = new TypingRace(passagetoSend, gameinfo, this);
         this.game = game;
@@ -76,13 +81,14 @@ public class RacePage extends JPanel {
             }
 
             
-            Typist t = new Typist(d.getSymbol().getText().trim().charAt(0), d.getTypistName().getText().trim(), acc, mistypeBase, duration, d.getEnergy().isSelected());
+            Typist t = new Typist(d.getSymbol().getText().trim().charAt(0), d.getTypistName().getText().trim(), acc, mistypeBase, duration, d.getEnergy().isSelected(), d.getColour());
             game.addTypist(t, i+1);
         }
 
         // area to display passage 
         JTextArea passageTxt = new JTextArea(passagetoSend);
         add(new JScrollPane(passageTxt), BorderLayout.NORTH);
+        passageTxt.setEditable(false);
 
         // area to display races (rows)
         JPanel typistLanes = new JPanel();
@@ -103,7 +109,21 @@ public class RacePage extends JPanel {
             row.add(passage, BorderLayout.CENTER);
             typistLanes.add(row);
         }
+        newRound();
+        JPanel winnerDisplay = new JPanel();
+        footer.add(winnerDisplay);
+        JButton newRace = new JButton("Start new race");
+        footer.add(newRace);
+        newRace.addActionListener(e ->  {
+            winnerDisplay.removeAll();
+            revalidate();
+            repaint();
+            newRound();
+        });
+    }
 
+
+    public void newRound(){
         game.resetAll();
         
         Timer t = new Timer(120, e -> {
@@ -111,7 +131,6 @@ public class RacePage extends JPanel {
             displayProgress();
             if (game.isFinished()){
                 ((Timer) e.getSource()).stop();
-                //showResults();
             }
         });
 
@@ -122,8 +141,9 @@ public class RacePage extends JPanel {
 
     public void printWinner(String winnerText){
         System.out.println("Winner call received ");
-        JPanel winnerDisplay = new JPanel();
-        add(winnerDisplay, BorderLayout.SOUTH);
+        if (winnerDisplay == null) {
+            return;
+        }
         JLabel texttoShow = new JLabel(winnerText);
         winnerDisplay.add(texttoShow);
         revalidate();
@@ -141,7 +161,8 @@ public class RacePage extends JPanel {
             String before = passage.substring(0, individualProgress);
             String current = passage.substring(individualProgress, individualProgress+1);
             String after = passage.substring(individualProgress+1, passage.length());
-            String toInsert = "<html> <span style='background-color: green'>" + before + "</span> <span style='background-color: yellow'>" + current + "</span>" + after + "</html>";
+            String chosenColor = String.format("#%02x%02x%02x", typistsInGame[i].getColour().getRed(), typistsInGame[i].getColour().getBlue(), typistsInGame[i].getColour().getGreen());
+            String toInsert = "<html> <span style='background-color: green'>" + before + "</span> <span style='background-color: " + chosenColor + ";'>" + current + "</span>" + after + "</html>";
             passageProgresses.get(i).setText(toInsert);
 
         }

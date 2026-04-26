@@ -12,6 +12,7 @@ public class RacePage extends JPanel {
     List<JLabel>passageProgresses;
     Timer t;
     JPanel footer;
+    JPanel winnerDisplay;
 
     public RacePage(JPanel mainPanel){
         JLabel label = new JLabel("RACE PAGE", SwingConstants.CENTER);
@@ -46,7 +47,7 @@ public class RacePage extends JPanel {
         
         for (int i=0; i<typistData.size(); i++){
             TypistRowData d = typistData.get(i);
-            double acc = 0.7;
+            double acc = 0.9;
             if (d.getTypingStyle().getSelectedItem().equals("Touch Typist")){
                 acc=acc-0.1; // accuracy decreased
             }
@@ -97,11 +98,14 @@ public class RacePage extends JPanel {
         add(typistLanes, BorderLayout.CENTER);
         List<JLabel>passageProgresses=new ArrayList<>();
         this.passageProgresses=passageProgresses;
+        
         for (int i=0; i<typistData.size(); i++){
             JPanel row = new JPanel(new BorderLayout());
             row.setBorder(BorderFactory.createLineBorder(Color.BLACK));
             JLabel typistSym = new JLabel(typistData.get(i).getSymbol().getText() + "     ");
             row.add(typistSym, BorderLayout.WEST);
+            JLabel statusUpdates = new JLabel();
+            row.add(statusUpdates, BorderLayout.EAST);
             JLabel passage = new JLabel();
             passageProgresses.add(passage);
             //passage.setEditable(false);
@@ -110,7 +114,7 @@ public class RacePage extends JPanel {
             typistLanes.add(row);
         }
         newRound();
-        JPanel winnerDisplay = new JPanel();
+        this.winnerDisplay = new JPanel();
         footer.add(winnerDisplay);
         JButton newRace = new JButton("Start new race");
         footer.add(newRace);

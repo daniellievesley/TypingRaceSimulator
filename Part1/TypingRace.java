@@ -119,6 +119,8 @@ public class TypingRace
             }
             }
 
+            printRace();
+
     }
 
     public boolean isFinished(){

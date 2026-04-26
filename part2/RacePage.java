@@ -100,7 +100,7 @@ public class RacePage extends JPanel {
         List<JLabel>passageProgresses=new ArrayList<>();
         this.passageProgresses=passageProgresses;
         List<JLabel>statusUpdates=new ArrayList<>();
-        this.statusUpdates=passageProgresses;
+        this.statusUpdates=statusUpdates;
         
         for (int i=0; i<typistData.size(); i++){
             JPanel row = new JPanel(new BorderLayout());

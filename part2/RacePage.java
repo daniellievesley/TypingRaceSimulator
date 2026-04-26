@@ -144,7 +144,7 @@ public class RacePage extends JPanel {
     public void newRound(){
         game.resetAll();
         
-        Timer t = new Timer(120, e -> {
+        Timer t = new Timer(240, e -> {
             game.startTurn();
             displayProgress();
             if (game.isFinished()){

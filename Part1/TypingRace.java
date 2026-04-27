@@ -170,6 +170,8 @@ public class TypingRace
             return;
         }
 
+        theTypist.incrementKeystroke();
+
         if (importedSettings.getCaffeine() && getTurns()<=10){
             multiplierCaffeine=multiplierCaffeine*1.5;
         }
@@ -190,6 +192,7 @@ public class TypingRace
                 // Mistype check — the probability should reflect the typist's accuracy
                 if (Math.random() < (1.0-theTypist.getAccuracy()*0.7*multiplierCaffeine) * theTypist.getMistypeBase())
                 {
+                theTypist.incrementMistype();
                 theTypist.slideBack(SLIDE_BACK_AMOUNT);
                 }
 
@@ -212,6 +215,7 @@ public class TypingRace
                 if (Math.random() < (1.0-theTypist.getAccuracy()*1.3*multiplierCaffeine) * theTypist.getMistypeBase())
                 {
                 theTypist.slideBack(SLIDE_BACK_AMOUNT);
+                theTypist.incrementMistype();
                 }
 
                 // Burnout check — pushing too hard increases burnout risk
@@ -234,6 +238,7 @@ public class TypingRace
         if (Math.random() < (1.0-theTypist.getAccuracy()*multiplierCaffeine) * theTypist.getMistypeBase())
         {
             theTypist.slideBack(SLIDE_BACK_AMOUNT);
+            theTypist.incrementMistype();
         }
 
         // Burnout check — pushing too hard increases burnout risk
@@ -274,6 +279,16 @@ public class TypingRace
             // update accuracy with new accuracy 
             for (int i=0; i<typists.length; i++){
                 typists[i].setAccuracy(typists[i].getAccuracy());
+            }
+
+            // statistics and analytics
+            double elapsedTime = (display.getEndTime()-display.getStartTime())/1000000000.0;
+            for (int i=0; i<typists.length; i++){
+                display.printWinner(typists[i].getName() + "'s statistics: ");
+                display.printWinner(" WPM: " + String.valueOf((PASSAGE_LENGTH*12)/elapsedTime));
+                display.printWinner(" Mistype count - " + String.valueOf(((double) typists[i].getMistypeCount()/(double) typists[i].getKeystrokeCount())*100.0));
+                display.printWinner(" Burnt out " + typists[i].getBurnOutCount() + " times!");
+                display.printWinner(" Accuracy changed from " + typists[i].getoriginalAccuracy() + " to " + typists[i].getAccuracy());
             }
             return true;
         }

@@ -22,6 +22,9 @@ public class Typist
     final private int BURNOUT_DURATION;
     final private boolean NOISE_CANCELLING;
     final private Color colour;
+    private int mistypeCount;
+    private int totalKeystrokes;
+    private int burntOutCount;
 
     // Fields of class Typist
     // Hint: you will need six fields. Think carefully about their types.
@@ -55,6 +58,9 @@ public class Typist
         this.BURNOUT_DURATION = duration;
         this.NOISE_CANCELLING = headphones;
         this.colour = colour;
+        this.mistypeCount = 0;
+        this.totalKeystrokes = 0;
+        this.burntOutCount = 0;
     }
 
 
@@ -71,6 +77,7 @@ public class Typist
         this.burnOut = true;
         this.burnOutTurns = turns;
         this.setAccuracy(this.getAccuracy()-this.getAccuracy()* 0.1);
+        this.burntOutCount++;
     }
 
     /**
@@ -255,6 +262,26 @@ public class Typist
 
     public boolean getHeadphones(){
         return this.NOISE_CANCELLING;
+    }
+
+    public void incrementMistype(){
+        this.mistypeCount++;
+    }
+
+    public int getMistypeCount(){
+        return this.mistypeCount;
+    }
+
+    public void incrementKeystroke(){
+        this.totalKeystrokes++;
+    }
+
+    public int getKeystrokeCount(){
+        return this.totalKeystrokes;
+    }
+
+    public int getBurnOutCount(){
+        return this.burntOutCount;
     }
 
 }

@@ -182,10 +182,11 @@ public class RacePage extends JPanel {
         if (winnerDisplay == null) {
             return;
         }
-        JLabel texttoShow = new JLabel(winnerText);
+        JTextArea texttoShow = new JTextArea(winnerText);
+        texttoShow.setEditable(false);
         winnerDisplay.add(texttoShow);
-        revalidate();
-        repaint();
+        //revalidate();
+        //repaint();
     }
         
     public void displayProgress(){

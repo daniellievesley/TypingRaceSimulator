@@ -178,8 +178,7 @@ public class RacePage extends JPanel {
 
     }
 
-    public void printWinner(String winnerText){
-        System.out.println("Winner call received ");
+    public void printResults(String winnerText){
         if (winnerDisplay == null) {
             return;
         }

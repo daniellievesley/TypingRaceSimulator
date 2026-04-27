@@ -262,19 +262,19 @@ public class TypingRace
         // Typist progress can now meet or exceed passage length
         if (theTypist.getProgress() >= PASSAGE_LENGTH)
         {
-            display.printWinner("  And the winner is... " + theTypist.getName() + "!");
+            display.printResults("  And the winner is... " + theTypist.getName() + "!");
             System.out.println("first call is made");
             theTypist.setAccuracy(theTypist.getAccuracy()+0.05);
             if (theTypist.getAccuracy()>theTypist.getoriginalAccuracy()){
-                display.printWinner("  Final accuracy: " + theTypist.getAccuracy() + " (improved from " + theTypist.getoriginalAccuracy() +")");
+                display.printResults("  Final accuracy: " + theTypist.getAccuracy() + " (improved from " + theTypist.getoriginalAccuracy() +")");
                 System.out.println("Call made");
             }
             else if (theTypist.getAccuracy()==theTypist.getoriginalAccuracy()) {
-                display.printWinner("  Final accuracy: " + theTypist.getAccuracy() + " (remained same from " + theTypist.getoriginalAccuracy() +")");
+                display.printResults("  Final accuracy: " + theTypist.getAccuracy() + " (remained same from " + theTypist.getoriginalAccuracy() +")");
                 System.out.println("Call made");
             }
             else {
-                display.printWinner("  Final accuracy: " + theTypist.getAccuracy() + " (decreased from " + theTypist.getoriginalAccuracy() +")");
+                display.printResults("  Final accuracy: " + theTypist.getAccuracy() + " (decreased from " + theTypist.getoriginalAccuracy() +")");
                 System.out.println("Call made");
             }
             // update accuracy with new accuracy 
@@ -286,11 +286,11 @@ public class TypingRace
             double elapsedTime = (display.getEndTime()-display.getStartTime())/1000000000.0;
             DecimalFormat to1DP = new DecimalFormat("#.0");
             for (int i=0; i<typists.length; i++){
-                display.printWinner(typists[i].getName() + "'s statistics: ");
-                display.printWinner(" WPM: " + String.valueOf(to1DP.format((PASSAGE_LENGTH*12)/elapsedTime)));
-                display.printWinner(" Mistype count - " + String.valueOf(to1DP.format(((double) typists[i].getMistypeCount()/(double) typists[i].getKeystrokeCount())*100.0)));
-                display.printWinner(" Burnt out " + typists[i].getBurnOutCount() + " times!");
-                display.printWinner(" Accuracy changed from " + typists[i].getoriginalAccuracy() + " to " + typists[i].getAccuracy());
+                display.printResults(typists[i].getName() + "'s statistics: ");
+                display.printResults(" WPM: " + String.valueOf(to1DP.format((PASSAGE_LENGTH*12)/elapsedTime)));
+                display.printResults(" Mistype count - " + String.valueOf(to1DP.format(((double) typists[i].getMistypeCount()/(double) typists[i].getKeystrokeCount())*100.0)));
+                display.printResults(" Burnt out " + typists[i].getBurnOutCount() + " times!");
+                display.printResults(" Accuracy changed from " + typists[i].getoriginalAccuracy() + " to " + typists[i].getAccuracy());
             }
             return true;
         }

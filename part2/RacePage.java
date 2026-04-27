@@ -14,6 +14,8 @@ public class RacePage extends JPanel {
     JPanel footer;
     JPanel winnerDisplay;
     List<JLabel>statusUpdates;
+    long startTime;
+    long endTime;
 
     public RacePage(JPanel mainPanel){
         JLabel label = new JLabel("RACE PAGE", SwingConstants.CENTER);
@@ -23,13 +25,13 @@ public class RacePage extends JPanel {
     public void passData (GameData gameinfo, List<TypistRowData> typistData){
         String passagetoSend = "The quick brown fox jumps over the lazy dog. It is often used to practice typing because it includes every letter.";
         if (gameinfo.getLen().equals("Short")){
-            passagetoSend = "Mile End is a district in the London Borough of Tower Hamlets. Home to Queen Mary, University of London, Mile End was named after it's one mile location on the old Colchester road, leading from Aldgate.";
+            passagetoSend = "Malta is an island nation in Europe. With the smallest population in the European Union (EU), it packs a punch!";
         }
         else if (gameinfo.getLen().equals("Medium")){
-            passagetoSend = "Colchester Zoo is a popular attraction for those visiting or living in Essex. Frequently ranked as one of the best zoos in the United Kingdom, Colchester Zoo is full of interactive exhibits for kids, teenagers and adults! A beautfiful 60 acre site home to rhinos, giraffes, lions and even pygmy hippos.";
+            passagetoSend = "Mile End is a district in the London Borough of Tower Hamlets. Home to Queen Mary, University of London, Mile End was named after it's one mile location on the old Colchester road, leading from Aldgate.";
         }
         else if (gameinfo.getLen().equals("Long")){
-            passagetoSend = "Malta is an island nation in Europe. With the smallest population in the European Union (EU), it packs a punch! Here, you will find many gorgeous beaches, including those at St Paul's Bay, perhaps at the Blue Lagoon or in Gozo. Malta is a former British colony and therefore drives on the left hand side of the road. However, since joining the EU it now uses the euro (€), rather than the pound, as of 2007.";
+            passagetoSend = "Colchester Zoo is a popular attraction for those visiting or living in Essex. Frequently ranked as one of the best zoos in the United Kingdom, Colchester Zoo is full of interactive exhibits for kids, teenagers and adults! A beautfiful 60 acre site home to rhinos, giraffes, lions and even pygmy hippos.";
         }
         else if (gameinfo.getLen().equals("Custom")){
             passagetoSend = gameinfo.getPassage();
@@ -117,6 +119,7 @@ public class RacePage extends JPanel {
             row.add(passage, BorderLayout.CENTER);
             typistLanes.add(row);
         }
+        recordStartTime();
         newRound();
         this.winnerDisplay = new JPanel();
         footer.add(winnerDisplay);
@@ -128,6 +131,22 @@ public class RacePage extends JPanel {
             repaint();
             newRound();
         });
+    }
+
+    public void recordStartTime(){
+        this.startTime = System.nanoTime();
+    }
+
+    public void recordEndTime(){
+        this.endTime = System.nanoTime();
+    }
+
+    public long getStartTime(){
+        return this.startTime;
+    }
+
+    public long getEndTime(){
+        return this.endTime;
     }
 
     public void showTypistUpdate(String updatetoDisplay, int identifier){
@@ -147,8 +166,10 @@ public class RacePage extends JPanel {
         Timer t = new Timer(240, e -> {
             game.startTurn();
             displayProgress();
+            recordEndTime();
             if (game.isFinished()){
                 ((Timer) e.getSource()).stop();
+                
             }
         });
 

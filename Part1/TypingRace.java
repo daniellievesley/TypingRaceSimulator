@@ -1,4 +1,5 @@
 package part1;
+import java.text.DecimalFormat;
 import java.util.Random;
 import part2.GameData;
 import part2.RacePage;
@@ -283,10 +284,11 @@ public class TypingRace
 
             // statistics and analytics
             double elapsedTime = (display.getEndTime()-display.getStartTime())/1000000000.0;
+            DecimalFormat to1DP = new DecimalFormat("#.0");
             for (int i=0; i<typists.length; i++){
                 display.printWinner(typists[i].getName() + "'s statistics: ");
-                display.printWinner(" WPM: " + String.valueOf((PASSAGE_LENGTH*12)/elapsedTime));
-                display.printWinner(" Mistype count - " + String.valueOf(((double) typists[i].getMistypeCount()/(double) typists[i].getKeystrokeCount())*100.0));
+                display.printWinner(" WPM: " + String.valueOf(to1DP.format((PASSAGE_LENGTH*12)/elapsedTime)));
+                display.printWinner(" Mistype count - " + String.valueOf(to1DP.format(((double) typists[i].getMistypeCount()/(double) typists[i].getKeystrokeCount())*100.0)));
                 display.printWinner(" Burnt out " + typists[i].getBurnOutCount() + " times!");
                 display.printWinner(" Accuracy changed from " + typists[i].getoriginalAccuracy() + " to " + typists[i].getAccuracy());
             }

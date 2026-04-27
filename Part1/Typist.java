@@ -8,6 +8,9 @@
 package part1;
 import java.awt.Color;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import part2.RaceRecord; 
+
 public class Typist
 {
     final private String name;
@@ -25,6 +28,8 @@ public class Typist
     private int mistypeCount;
     private int totalKeystrokes;
     private int burntOutCount;
+    private double bestWPMSoFar;
+    private ArrayList<RaceRecord> racesCompleted;
 
     // Fields of class Typist
     // Hint: you will need six fields. Think carefully about their types.
@@ -61,6 +66,7 @@ public class Typist
         this.mistypeCount = 0;
         this.totalKeystrokes = 0;
         this.burntOutCount = 0;
+        this.bestWPMSoFar = 0.0;
     }
 
 
@@ -282,6 +288,20 @@ public class Typist
 
     public int getBurnOutCount(){
         return this.burntOutCount;
+    }
+
+    public double getBestWPMSoFar(){
+        return this.bestWPMSoFar;
+    }
+
+    public void checkBestWPMSoFar(double WPMjustNow){
+        if (WPMjustNow > this.getBestWPMSoFar()){
+            this.bestWPMSoFar = WPMjustNow;
+        }
+    }
+
+    public void recordRace(RaceRecord details){
+        this.racesCompleted.add(details);
     }
 
 }

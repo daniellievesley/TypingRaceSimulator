@@ -3,6 +3,7 @@ import java.text.DecimalFormat;
 import java.util.Random;
 import part2.GameData;
 import part2.RacePage;
+import part2.RaceRecord;
 
 /**
  * A typing race simulation. Three typists race to complete a passage of text,
@@ -285,12 +286,34 @@ public class TypingRace
             // statistics and analytics
             double elapsedTime = (display.getEndTime()-display.getStartTime())/1000000000.0;
             DecimalFormat to1DP = new DecimalFormat("#.0");
+            double[] accuracies = new double[typists.length];
             for (int i=0; i<typists.length; i++){
                 display.printResults(typists[i].getName() + "'s statistics: ");
                 display.printResults(" WPM: " + String.valueOf(to1DP.format((PASSAGE_LENGTH*12)/elapsedTime)));
+                typists[i].checkBestWPMSoFar(Double.parseDouble(to1DP.format((PASSAGE_LENGTH*12)/elapsedTime)));
                 display.printResults(" Mistype count - " + String.valueOf(to1DP.format(((double) typists[i].getMistypeCount()/(double) typists[i].getKeystrokeCount())*100.0)));
                 display.printResults(" Burnt out " + typists[i].getBurnOutCount() + " times!");
                 display.printResults(" Accuracy changed from " + typists[i].getoriginalAccuracy() + " to " + typists[i].getAccuracy());
+                display.printResults("/n");
+                accuracies[i] = typists[i].getAccuracy();
+            }
+            for (int j=0; j<accuracies.length-1; j++){
+                for (int k=0; k < accuracies.length-j-1; k++){
+                    if (accuracies[j]>accuracies[j+1]){
+                        double temp = accuracies[j];
+                        accuracies[j] = accuracies[j+1];
+                        accuracies[j+1] = temp;
+                    }
+                }
+            }
+
+            for (int i=0; i<typists.length; i++){
+                for (int a = 0; a<accuracies.length; a++){
+                    if (accuracies[a]==typists[i].getAccuracy()){
+                        typists[i].recordRace(new RaceRecord(Double.parseDouble(to1DP.format((PASSAGE_LENGTH*12)/elapsedTime)), typists[i].getAccuracy(), typists[i].getBurnOutCount(), a+1));
+                        break;
+                    }
+                }
             }
             return true;
         }

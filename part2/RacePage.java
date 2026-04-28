@@ -1,5 +1,6 @@
 package part2;
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,13 +17,19 @@ public class RacePage extends JPanel {
     List<JLabel>statusUpdates;
     long startTime;
     long endTime;
+    JPanel mainPanel;
+    JPanel app;
+    Leaderboard board;
 
     public RacePage(JPanel mainPanel){
         JLabel label = new JLabel("RACE PAGE", SwingConstants.CENTER);
         JButton finishBtn = new JButton("Finish race");
+        this.mainPanel = mainPanel;
     }
 
-    public void passData (GameData gameinfo, List<TypistRowData> typistData){
+    public void passData (GameData gameinfo, List<TypistRowData> typistData, JPanel app, Leaderboard board){
+        this.app = app;
+        this.board = board;
         String passagetoSend = "The quick brown fox jumps over the lazy dog. It is often used to practice typing because it includes every letter.";
         if (gameinfo.getLen().equals("Short")){
             passagetoSend = "Malta is an island nation in Europe. With the smallest population in the European Union (EU), it packs a punch!";
@@ -125,12 +132,20 @@ public class RacePage extends JPanel {
         this.winnerDisplay.setLayout(new BoxLayout(this.winnerDisplay, BoxLayout.Y_AXIS));
         footer.add(winnerDisplay);
         JButton newRace = new JButton("Start new race");
+        JButton viewLeaderboard = new JButton("View leaderboard");
         footer.add(newRace);
+        footer.add(viewLeaderboard);
         newRace.addActionListener(e ->  {
             winnerDisplay.removeAll();
             revalidate();
             repaint();
             newRound();
+        });
+        viewLeaderboard.addActionListener(e -> {
+            CardLayout layout = (CardLayout) app.getLayout();
+            board.create(game, app);
+            layout.show(app, "Leaderboard");
+
         });
     }
 

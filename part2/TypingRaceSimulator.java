@@ -10,10 +10,12 @@ public class TypingRaceSimulator {
         JPanel appCard = new JPanel(layout);
         CustomiseTypists customiseCard = new CustomiseTypists(appCard);
         RacePage raceUI = new RacePage(appCard);
-        IntroPage introCard = new IntroPage(appCard, customiseCard, raceUI);
+        Leaderboard boardUI = new Leaderboard(appCard);
+        IntroPage introCard = new IntroPage(appCard, customiseCard, raceUI, boardUI);
         appCard.add(introCard, "Intro");
         appCard.add(customiseCard, "CustomiseTypists");
         appCard.add(raceUI, "RacePage");
+        appCard.add(boardUI, "Leaderboard");
         mainApp.add(appCard);
         mainApp.pack();
         mainApp.setLocationRelativeTo(null);

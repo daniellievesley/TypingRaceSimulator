@@ -19,13 +19,12 @@ public class Leaderboard extends JPanel{
     public void create(TypingRace game, JPanel app){
         removeAll();
         this.app = app;
-        JLabel title = new JLabel("Leaderboard");
-        add(title, BorderLayout.NORTH);
         JPanel tablePanel = new JPanel();
         JPanel comparisonView = new JPanel();
+        comparisonView.setLayout(new BoxLayout(comparisonView, BoxLayout.Y_AXIS));
         tablePanel.setLayout(new BoxLayout(tablePanel, BoxLayout.Y_AXIS));
-        add(tablePanel);
-        add(comparisonView);
+        add(tablePanel, BorderLayout.NORTH);
+        add(comparisonView, BorderLayout.CENTER);
         DefaultTableModel model = new DefaultTableModel();
         JTable table = new JTable (model);
         model.addColumn("Rank");
@@ -37,7 +36,7 @@ public class Leaderboard extends JPanel{
             Object[] row = {i+1, game.getTypists()[i].getName(), game.getTypists()[i].getPoints()};
             model.insertRow(i, row);
         }
-        add(table);
+        tablePanel.add(table);
 
         // comparison view 
         List<JCheckBox> typistSelectionBoxes = new ArrayList<>();
@@ -59,7 +58,25 @@ public class Leaderboard extends JPanel{
                     typiststoCompare.add(game.getTypists()[i]);
                 }
             }
-            
+            JTextArea comparisonOutput = new JTextArea(typiststoCompare.size(), 1);
+            comparisonView.add(comparisonOutput);
+            comparisonOutput.setEditable(false);
+            if (metricChosen.getSelectedItem().equals("WPM")){
+                for (int i=0; i<typiststoCompare.size(); i++){
+                    comparisonOutput.append(typiststoCompare.get(i).getName() + ": " + typiststoCompare.get(i).getBestWPMSoFar() + "\n");
+                }
+            }
+            else if (metricChosen.getSelectedItem().equals("Points")){
+                for (int i=0; i<typiststoCompare.size(); i++){
+                    comparisonOutput.append(typiststoCompare.get(i).getName() + ": " + typiststoCompare.get(i).getPoints() + "\n");
+                }
+            }
+            else if (metricChosen.getSelectedItem().equals("Accuracy")){
+                for (int i=0; i<typiststoCompare.size(); i++){
+                    comparisonOutput.append(typiststoCompare.get(i).getName() + ": " + typiststoCompare.get(i).getAccuracy() + "\n");
+                }
+            }
+
         });
         JButton returntoGame = new JButton("Return to game");
         add(returntoGame, BorderLayout.SOUTH);

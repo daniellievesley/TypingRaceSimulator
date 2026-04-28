@@ -326,6 +326,7 @@ public class TypingRace
             }
 
             awardRoundPoints(typists, elapsedTime);
+            return true;
         }
         else {
             return false;

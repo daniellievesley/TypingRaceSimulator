@@ -12,7 +12,7 @@ public class CustomiseTypists extends JPanel {
         add(label, BorderLayout.CENTER);
     }
 
-    public void takeData(String len, String passage, Integer seats, Boolean auto, Boolean caffeine, boolean night, JPanel app, RacePage racePage) {
+    public void takeData(String len, String passage, Integer seats, Boolean auto, Boolean caffeine, boolean night, JPanel app, RacePage racePage, Leaderboard board) {
         GameData gameInfo = new GameData(len, passage, seats, auto, caffeine, night);
         List<JPanel> typistPanels = new ArrayList<>();
         List<TypistRowData> typistData = new ArrayList<>();
@@ -61,7 +61,7 @@ public class CustomiseTypists extends JPanel {
 
         contToGame.addActionListener(e -> {
             CardLayout layout = (CardLayout) app.getLayout();
-            racePage.passData(gameInfo, typistData);
+            racePage.passData(gameInfo, typistData, app, board);
             layout.show(app, "RacePage");
     });
 

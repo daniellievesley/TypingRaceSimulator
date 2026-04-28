@@ -122,6 +122,7 @@ public class RacePage extends JPanel {
         recordStartTime();
         newRound();
         this.winnerDisplay = new JPanel();
+        this.winnerDisplay.setLayout(new BoxLayout(this.winnerDisplay, BoxLayout.Y_AXIS));
         footer.add(winnerDisplay);
         JButton newRace = new JButton("Start new race");
         footer.add(newRace);
@@ -182,11 +183,10 @@ public class RacePage extends JPanel {
         if (winnerDisplay == null) {
             return;
         }
-        JTextArea texttoShow = new JTextArea(winnerText);
-        texttoShow.setEditable(false);
+        JLabel texttoShow = new JLabel(winnerText);
         winnerDisplay.add(texttoShow);
-        //revalidate();
-        //repaint();
+        revalidate();
+        repaint();
     }
         
     public void displayProgress(){

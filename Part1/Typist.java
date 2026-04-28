@@ -30,6 +30,7 @@ public class Typist
     private int burntOutCount;
     private double bestWPMSoFar;
     private ArrayList<RaceRecord> racesCompleted;
+    private int points;
 
     // Fields of class Typist
     // Hint: you will need six fields. Think carefully about their types.
@@ -67,6 +68,8 @@ public class Typist
         this.totalKeystrokes = 0;
         this.burntOutCount = 0;
         this.bestWPMSoFar = 0.0;
+        this.racesCompleted = new ArrayList<>();
+        this.points = 0;
     }
 
 
@@ -302,6 +305,14 @@ public class Typist
 
     public void recordRace(RaceRecord details){
         this.racesCompleted.add(details);
+    }
+
+    public void awardPoints(int pointsToAward){
+        this.points= this.points+pointsToAward;
+    }
+
+    public int getPoints(){
+        return this.points;
     }
 
 }

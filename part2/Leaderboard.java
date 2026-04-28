@@ -49,6 +49,18 @@ public class Leaderboard extends JPanel{
 
         List<String> metricToCompare = List.of("WPM", "Points", "Accuracy");
         JComboBox<String> metricChosen = new JComboBox<>(metricToCompare.toArray(new String[0]));
+        comparisonView.add(metricChosen);
+        JButton compareTypistsReq = new JButton("Compare typists");
+        comparisonView.add(compareTypistsReq);
+        compareTypistsReq.addActionListener(e -> {
+            List<Typist> typiststoCompare = new ArrayList<>();
+            for (int i=0; i<typistSelectionBoxes.size(); i++){
+                if (typistSelectionBoxes.get(i).isSelected()){
+                    typiststoCompare.add(game.getTypists()[i]);
+                }
+            }
+            
+        });
         JButton returntoGame = new JButton("Return to game");
         add(returntoGame, BorderLayout.SOUTH);
         returntoGame.addActionListener(e -> {

@@ -288,18 +288,18 @@ public class TypingRace
             DecimalFormat to1DP = new DecimalFormat("#.0");
             double[] accuracies = new double[typists.length];
             for (int i=0; i<typists.length; i++){
-                display.printResults(typists[i].getName() + "'s statistics: ");
-                display.printResults(" WPM: " + String.valueOf(to1DP.format((PASSAGE_LENGTH*12)/elapsedTime)));
-                typists[i].checkBestWPMSoFar(Double.parseDouble(to1DP.format((PASSAGE_LENGTH*12)/elapsedTime)));
-                display.printResults(" Mistype count - " + String.valueOf(to1DP.format(((double) typists[i].getMistypeCount()/(double) typists[i].getKeystrokeCount())*100.0)));
-                display.printResults(" Burnt out " + typists[i].getBurnOutCount() + " times!");
-                display.printResults(" Accuracy changed from " + typists[i].getoriginalAccuracy() + " to " + typists[i].getAccuracy());
-                display.printResults("/n");
+                display.printResults(typists[i].getName() + "'s statistics: " + " WPM: " + String.valueOf(to1DP.format((typists[i].getProgress()*12)/elapsedTime)) + " Mistype count - " + String.valueOf(to1DP.format(((double) typists[i].getMistypeCount()/(double) typists[i].getKeystrokeCount())*100.0)) + " Burnt out " + typists[i].getBurnOutCount() + " times!" + " Accuracy changed from " + typists[i].getoriginalAccuracy() + " to " + typists[i].getAccuracy());
+                // display.printResults(" WPM: " + String.valueOf(to1DP.format((PASSAGE_LENGTH*12)/elapsedTime)));
+                typists[i].checkBestWPMSoFar(Double.parseDouble(to1DP.format((typists[i].getProgress()*12)/elapsedTime)));
+                // display.printResults(" Mistype count - " + String.valueOf(to1DP.format(((double) typists[i].getMistypeCount()/(double) typists[i].getKeystrokeCount())*100.0)));
+                // display.printResults(" Burnt out " + typists[i].getBurnOutCount() + " times!");
+                // display.printResults(" Accuracy changed from " + typists[i].getoriginalAccuracy() + " to " + typists[i].getAccuracy());
+                //display.printResults("\n");
                 accuracies[i] = typists[i].getAccuracy();
             }
-            for (int j=0; j<accuracies.length-1; j++){
+            for (int j=0; j<accuracies.length-1; j++){ // sorted accuracies high-low
                 for (int k=0; k < accuracies.length-j-1; k++){
-                    if (accuracies[j]>accuracies[j+1]){
+                    if (accuracies[j]<accuracies[j+1]){
                         double temp = accuracies[j];
                         accuracies[j] = accuracies[j+1];
                         accuracies[j+1] = temp;
@@ -307,18 +307,38 @@ public class TypingRace
                 }
             }
 
-            for (int i=0; i<typists.length; i++){
+            for (int i=0; i<typists.length; i++){ // nested for loop which checks to find their accuracy in the rank and store rank in race record
                 for (int a = 0; a<accuracies.length; a++){
                     if (accuracies[a]==typists[i].getAccuracy()){
+                        if (a==0){
+                            typists[i].awardPoints(3);
+                        }
+                        else if (a==1){
+                            typists[i].awardPoints(2);
+                        }
+                        else if (a==2){
+                            typists[i].awardPoints(1);
+                        }
                         typists[i].recordRace(new RaceRecord(Double.parseDouble(to1DP.format((PASSAGE_LENGTH*12)/elapsedTime)), typists[i].getAccuracy(), typists[i].getBurnOutCount(), a+1));
                         break;
                     }
                 }
             }
-            return true;
+
+            awardRoundPoints(typists, elapsedTime);
         }
         else {
             return false;
+        }
+    }
+
+    private void awardRoundPoints(Typist[] typists, double elapsedTime){
+        for (int i=0; i<typists.length; i++){
+            double wpm = (typists[i].getProgress()*12)/elapsedTime;
+            typists[i].awardPoints((int) Math.round(wpm/10.0));
+            if (typists[i].isBurntOut()!=false){
+                typists[i].awardPoints(5);
+            }
         }
     }
 

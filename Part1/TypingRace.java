@@ -250,6 +250,8 @@ public class TypingRace
             theTypist.burnOut(theTypist.getburnOutDuration());
         }
     }
+
+    checkforBadges();
 }
 
     /**
@@ -263,6 +265,7 @@ public class TypingRace
         // Typist progress can now meet or exceed passage length
         if (theTypist.getProgress() >= PASSAGE_LENGTH)
         {
+            theTypist.addWintoCount();
             display.printResults("  And the winner is... " + theTypist.getName() + "!");
             System.out.println("first call is made");
             theTypist.setAccuracy(theTypist.getAccuracy()+0.05);
@@ -339,6 +342,18 @@ public class TypingRace
             typists[i].awardPoints((int) Math.round(wpm/10.0));
             if (typists[i].isBurntOut()!=false){
                 typists[i].awardPoints(5);
+            }
+        }
+    }
+
+    private void checkforBadges(){
+        for (int i=0; i<typists.length; i++){
+            // check for 5 consec Burn Out Free Turns 
+            if (typists[i].getBOFreeTurns()==5){
+                typists[i].awardBadge("Iron Fingers");
+            }
+            if (typists[i].getWinCount()==3){
+                typists[i].awardBadge("Speed Demon");
             }
         }
     }

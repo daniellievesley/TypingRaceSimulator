@@ -1,3 +1,10 @@
+/**
+ * Main method to run a typing race with 3 typists. Typist and game object(s) created. Game then ran.
+ *
+ * @author Daniel Lievesley
+ * @version 1.0
+ */
+
 public class Main {
     public static void main (String[] args){
         Typist t1 = new Typist ('\u2460', "TurboTyper", 0.6);

@@ -51,16 +51,17 @@ public class Leaderboard extends JPanel{
         comparisonView.add(metricChosen);
         JButton compareTypistsReq = new JButton("Compare typists");
         comparisonView.add(compareTypistsReq);
+        JTextArea comparisonOutput = new JTextArea();
+        comparisonView.add(comparisonOutput);
+        comparisonOutput.setEditable(false);
         compareTypistsReq.addActionListener(e -> {
+            comparisonOutput.setText("");
             List<Typist> typiststoCompare = new ArrayList<>();
             for (int i=0; i<typistSelectionBoxes.size(); i++){
                 if (typistSelectionBoxes.get(i).isSelected()){
                     typiststoCompare.add(game.getTypists()[i]);
                 }
             }
-            JTextArea comparisonOutput = new JTextArea(typiststoCompare.size(), 1);
-            comparisonView.add(comparisonOutput);
-            comparisonOutput.setEditable(false);
             if (metricChosen.getSelectedItem().equals("WPM")){
                 for (int i=0; i<typiststoCompare.size(); i++){
                     comparisonOutput.append(typiststoCompare.get(i).getName() + ": " + typiststoCompare.get(i).getBestWPMSoFar() + "\n");

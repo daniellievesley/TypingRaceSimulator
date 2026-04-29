@@ -1,9 +1,6 @@
-package part1;
+package part2;
 import java.text.DecimalFormat;
 import java.util.Random;
-import part2.GameData;
-import part2.RacePage;
-import part2.RaceRecord;
 
 /**
  * A typing race simulation. Three typists race to complete a passage of text,

@@ -5,11 +5,10 @@
  * @version 25/03/2026
  */
 
-package part1;
+package part2;
 import java.awt.Color;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import part2.RaceRecord; 
+import java.util.ArrayList; 
 
 public class Typist
 {

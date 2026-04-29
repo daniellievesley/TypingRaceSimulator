@@ -4,7 +4,7 @@
  * A typist has several fields such as their progress and acccuracy (which are variable) and some which are fixed such as their name and symbol.
  *
  * @author Daniel Lievesley
- * @version 29/04/2026
+ * @version 1.0
  */
 
 import java.text.DecimalFormat;

@@ -22,7 +22,7 @@ javac Typist.java TypingRace.java
 ### How to run
 
 The race is started by calling `startRace()` on a `TypingRace` object.
-A simple way to test this is to use the `main` method of the `Main` class, which serves as an entry point to the program, creating 3 typist objects and a race object. This method starts the race. The race object's `addTypist()` method is called, passing in the newly created Typist objects to the race. This means that, now with typists added, the race can be started by calling `startRace()` on the race object.
+A simple way to test this is to use the `main` method of the `Main` class, which serves as an entry point to the program, creating 3 typist objects and a race object. This method starts the race. Firstly, 3 typist objects are created by calling the constructor, passing in the character code (in this case circled numbers such as ① via their unicode), their name and accuracy (as a double). The game is then created by initialising a TypingRace object, and calling it's constructor, by passing in an integer as the passage length as an argument. The race object's `addTypist()` method is called, passing in the newly created Typist objects to the race along with their seat number (integer). This means that, now with typists added, the race can be started by calling `startRace()` on the race object.
 
 ```java
 public class Main {

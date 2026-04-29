@@ -1,8 +1,10 @@
 /**
- * Write a description of class Typist here.
+ * Typist is the class of the indvidual players within the simulation game.
+ * Each typist has various metrics and score information stored about them and their progress, which is stored here.
+ * A typist has several fields such as their progress and acccuracy (which are variable) and some which are fixed such as their name and symbol.
  *
  * @author Daniel Lievesley
- * @version 25/03/2026
+ * @version 29/04/2026
  */
 
 import java.text.DecimalFormat;
@@ -10,22 +12,12 @@ public class Typist
 {
     final private String name;
     private char symbol;
-    private int currentProgress;
+    private int currentProgress; // ie how far within a passage a typist is
     private boolean burnOut;
     private int burnOutTurns;
     private double accuracy;
     private boolean justMistyped;
     final private double originalAccuracy;
-
-    // Fields of class Typist
-    // Hint: you will need six fields. Think carefully about their types.
-    // One of them tracks how far along the passage the typist has reached.
-    // Another tracks whether the typist is currently burnt out.
-    // A third tracks HOW MANY turns of burnout remain (not just whether they are burnt out).
-    // The remaining three should be fairly obvious.
-
-
-
 
     // Constructor of class Typist
     /**
@@ -120,7 +112,7 @@ public class Typist
      */
     public char getSymbol()
     {
-        return this.symbol; // placeholder - replace with correct implementation
+        return this.symbol; 
     }
 
     /**
@@ -219,14 +211,28 @@ public class Typist
         this.symbol = newSymbol;
     }
 
+    /**
+     * Sets the status flag of being in mistype to false
+     *
+     */
     public void resetMistype(){
         this.justMistyped = false;
     }
 
+    /**
+     * Returns the typists mistype status
+     *
+     * @return whether the user has just mistype
+     */
     public boolean mistypeStatus(){
         return this.justMistyped;
     }
 
+    /**
+     * Returns the original accuracy of the typist (unchanged after game play)
+     *
+     * @return original accuracy of the typist 
+     */
     public double getoriginalAccuracy(){
         return originalAccuracy;
     }

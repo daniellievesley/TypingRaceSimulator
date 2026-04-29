@@ -179,7 +179,8 @@ public class TypingRace
         if (theTypist.getProgress() >= PASSAGE_LENGTH)
         {
             System.out.println("  And the winner is... " + theTypist.getName() + "!");
-            theTypist.setAccuracy(theTypist.getAccuracy()+0.05);
+            theTypist.setAccuracy(theTypist.getAccuracy()+0.05); // winning bonus accuracy awarded
+            // logic below to determine appropriate message to announce accuracy change (increase/remained same/decreased)
             if (theTypist.getAccuracy()>theTypist.getoriginalAccuracy()){
                 System.out.println("  Final accuracy: " + theTypist.getAccuracy() + " (improved from " + theTypist.getoriginalAccuracy() +")");
             }
@@ -233,11 +234,9 @@ public class TypingRace
      * Prints a single typist's lane.
      *
      * Examples:
-     *   |          ⌨           | TURBOFINGERS (Accuracy: 0.85)
+     *   |          ⌨          | TURBOFINGERS (Accuracy: 0.85)
      *   |    [~]              | HUNT_N_PECK  (Accuracy: 0.40) BURNT OUT (2 turns)
      *
-     * Note: Ty forgot to show when a typist has just mistyped. That would
-     * be a nice improvement — perhaps a [<] marker after their symbol.
      *
      * @param theTypist the typist whose lane to print
      */
@@ -257,7 +256,7 @@ public class TypingRace
             System.out.print('~');
             spacesAfter--; // symbol + ~ together take two characters
         }
-
+        // Append < when in mistype - so the state is visible without hiding identity
         if (theTypist.mistypeStatus()){
             System.out.print('<');
             spacesAfter--;

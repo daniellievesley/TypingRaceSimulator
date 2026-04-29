@@ -204,7 +204,6 @@ public class Typist
     public void typeCharacter()
     {
         if (!(this.burnOut)){
-            increaseBOFree();
             this.currentProgress= this.currentProgress+1;
         }
     }

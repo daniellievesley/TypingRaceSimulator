@@ -1,3 +1,11 @@
+/**
+ * CustomiseTypists is a class which creates GUI interface for the user to determine add ons/settings for each typist
+ * This class contains methods which take data from previous object, and also those that call the next object.
+ *
+ * @author Daniel Lievesley
+ * @version 1.0
+ */
+
 package part2;
 import java.awt.*;
 import java.util.ArrayList;
@@ -6,12 +14,32 @@ import javax.swing.*;
 
 public class CustomiseTypists extends JPanel {
 
+    /**
+     * Constructor for objects of class CustomiseTypists
+     * Creates a new object with grid layout and label set to center.
+     *
+     * @param mainPanel contains the 'app' card panel which occupies all of the JFrame - this is where cards such as CustomiseTypists will be displayed
+     */
     public CustomiseTypists(JPanel mainPanel) {
         setLayout(new GridLayout(0,1));
         JLabel label = new JLabel("Customising typists", SwingConstants.CENTER);
         add(label, BorderLayout.CENTER);
     }
 
+    /**
+     * takeData() 
+     * Takes data from IntroPage object, such as seat count and type of race length and begins to set up panel which will house customisation
+     * Customisation taken via swing UI elements such as comboboxes or checkboxes - these references are stored in a list, so the contents can be accessed later
+     *
+     * @param len contains the length of the passage selected by the user
+     * @param passage contains the custom passage entered by the user, if applicable
+     * @param seats contains the number of seats chosen
+     * @param auto contains the boolean value of if autocorrect is selected
+     * @param caffeine contains the boolean value of if caffeine is selected
+     * @param night contains boolean value of if night shift is selected
+     * @param app contains the main panel which holds all cards of the game
+     * @param racePage contains
+     */
     public void takeData(String len, String passage, Integer seats, Boolean auto, Boolean caffeine, boolean night, JPanel app, RacePage racePage, Leaderboard board) {
         GameData gameInfo = new GameData(len, passage, seats, auto, caffeine, night);
         List<JPanel> typistPanels = new ArrayList<>();

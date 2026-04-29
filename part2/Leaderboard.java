@@ -23,10 +23,11 @@ public class Leaderboard extends JPanel{
         JPanel comparisonView = new JPanel();
         comparisonView.setLayout(new BoxLayout(comparisonView, BoxLayout.Y_AXIS));
         tablePanel.setLayout(new BoxLayout(tablePanel, BoxLayout.Y_AXIS));
-        add(tablePanel, BorderLayout.NORTH);
-        add(comparisonView, BorderLayout.CENTER);
+        add(tablePanel, BorderLayout.CENTER);
+        add(comparisonView, BorderLayout.NORTH);
         DefaultTableModel model = new DefaultTableModel();
         JTable table = new JTable (model);
+        JScrollPane scrlPane = new JScrollPane(table);
         model.addColumn("Rank");
         model.addColumn("Name");
         model.addColumn("Points");
@@ -37,7 +38,7 @@ public class Leaderboard extends JPanel{
             Object[] row = {i+1, game.getTypists()[i].getName(), game.getTypists()[i].getPoints(), game.getTypists()[i].getBadgeString()};
             model.insertRow(i, row);
         }
-        tablePanel.add(table);
+        tablePanel.add(scrlPane);
 
         // comparison view 
         JLabel infoForComparisonSupport = new JLabel("Select the typists you wish to compare, and the metric from the dropdown. Then, press compare!");

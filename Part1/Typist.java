@@ -31,6 +31,9 @@ public class Typist
     private double bestWPMSoFar;
     private ArrayList<RaceRecord> racesCompleted;
     private int points;
+    private int consecBOFreeTurns;
+    private int winCount;
+    private ArrayList <String> badges;
 
     // Fields of class Typist
     // Hint: you will need six fields. Think carefully about their types.
@@ -70,6 +73,9 @@ public class Typist
         this.bestWPMSoFar = 0.0;
         this.racesCompleted = new ArrayList<>();
         this.points = 0;
+        this.consecBOFreeTurns = 0;
+        this.winCount = 0;
+        this.badges = new ArrayList<>();
     }
 
 
@@ -83,6 +89,7 @@ public class Typist
      */
     public void burnOut(int turns)
     {
+        this.consecBOFreeTurns = 0;
         this.burnOut = true;
         this.burnOutTurns = turns;
         this.setAccuracy(this.getAccuracy()-this.getAccuracy()* 0.1);
@@ -197,6 +204,7 @@ public class Typist
     public void typeCharacter()
     {
         if (!(this.burnOut)){
+            increaseBOFree();
             this.currentProgress= this.currentProgress+1;
         }
     }
@@ -313,6 +321,39 @@ public class Typist
 
     public int getPoints(){
         return this.points;
+    }
+
+    public void increaseBOFree(){
+        this.consecBOFreeTurns++;
+    }
+
+    public int getBOFreeTurns(){
+        return this.consecBOFreeTurns;
+    }
+
+    public int getWinCount(){
+        return this.winCount;
+    }
+
+    public void addWintoCount(){
+        this.winCount++;
+    }
+
+    public void awardBadge(String badge){
+        for (int i=0; i<this.badges.size(); i++){
+            if (this.badges.get(i).equals(badge)){
+               return; 
+            }
+        }
+        this.badges.add(badge);
+    }
+
+    public String getBadgeString(){
+        String toRtn = "";
+        for (int i=0; i<this.badges.size(); i++){
+            toRtn=toRtn + this.badges.get(i) + ", ";
+        }
+        return toRtn;
     }
 
 }

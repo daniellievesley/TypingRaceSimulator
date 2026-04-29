@@ -7,8 +7,6 @@ import java.util.Comparator;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import part1.TypingRace;
-import part1.Typist;
 
 public class Leaderboard extends JPanel{
     JPanel app;

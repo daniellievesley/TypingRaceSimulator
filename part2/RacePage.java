@@ -5,8 +5,6 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
-import part1.TypingRace;
-import part1.Typist;
 
 public class RacePage extends JPanel {
     TypingRace game;

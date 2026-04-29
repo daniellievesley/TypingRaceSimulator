@@ -352,6 +352,7 @@ public class TypingRace
             if (typists[i].getBOFreeTurns()==5){
                 typists[i].awardBadge("Iron Fingers");
             }
+            // check for 3 win count 
             if (typists[i].getWinCount()==3){
                 typists[i].awardBadge("Speed Demon");
             }

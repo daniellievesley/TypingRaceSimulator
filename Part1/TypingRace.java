@@ -5,21 +5,18 @@ import java.util.concurrent.TimeUnit;
  * A typing race simulation. Three typists race to complete a passage of text,
  * advancing character by character — or sliding backwards when they mistype.
  *
- * Originally written by Ty Posaurus, who left this project to "focus on his
- * two-finger technique". He assured us the code was "basically done".
- * We have found evidence to the contrary.
+ * This part contains files which will lead to terminal output. 
  *
- * @author TyPosaurus
- * @version 0.7 (the other 0.3 is left as an exercise for the reader)
+ * @author Daniel Lievesley
+ * @version 1.0
  */
 public class TypingRace
 {
     private final int PASSAGE_LENGTH;   // Total characters in the passage to type
-    private Typist seat1Typist;
+    private Typist seat1Typist; // holds Typist object 'seat', and does so for 3 typists
     private Typist seat2Typist;
     private Typist seat3Typist;
     // Accuracy thresholds for mistype and burnout events
-    // (Ty tuned these values "by feel". They may need adjustment.)
     private static final double MISTYPE_BASE_CHANCE = 0.3;
     private static final int    SLIDE_BACK_AMOUNT   = 2;
     private static final int    BURNOUT_DURATION     = 3;
@@ -71,8 +68,6 @@ public class TypingRace
      * All typists are reset to the beginning, then the simulation runs
      * turn by turn until one typist completes the full passage.
      *
-     * Note from Ty: "I didn't bother printing the winner at the end,
-     * you can probably figure that out yourself."
      */
     public void startRace()
     {
@@ -84,6 +79,7 @@ public class TypingRace
         seat2Typist.resetToStart();
         seat3Typist.resetToStart();
 
+        // forcing mechanism: if all typists have accuracy of 0, then a random (un-burnt out) typist is selected to advance
         while (!finished)
         {
             if (seat1Typist.getAccuracy()==0.0&&seat2Typist.getAccuracy()==0.0&&seat3Typist.getAccuracy()==0.0){
@@ -126,8 +122,6 @@ public class TypingRace
         }
     }
 
-        // TODO (Task 2a): Print the winner's name here
-
     /**
      * Simulates one turn for a typist.
      *
@@ -153,19 +147,22 @@ public class TypingRace
         // Attempt to type a character
         if (Math.random() < theTypist.getAccuracy())
         {
+            // makes progress - types a character 
             theTypist.typeCharacter();
         }
 
         // Mistype check — the probability should reflect the typist's accuracy
         if (Math.random() < (1.0-theTypist.getAccuracy()) * MISTYPE_BASE_CHANCE)
         {
+            // typist slides back by the specified amount
             theTypist.slideBack(SLIDE_BACK_AMOUNT);
         }
 
         // Burnout check — pushing too hard increases burnout risk
-        // (probability scales with accuracy squared, capped at ~0.05)
+        // (probability scales with accuracy squared, capped at ~0.08)
         if (Math.random() < 0.08 * theTypist.getAccuracy() * theTypist.getAccuracy())
         {
+            // typist will burn out (ie freeze) for a certain amount of rounds
             theTypist.burnOut(BURNOUT_DURATION);
         }
     }
@@ -178,7 +175,7 @@ public class TypingRace
      */
     private boolean raceFinishedBy(Typist theTypist)
     {
-        // Typist progress can now meet or exceed passage length
+        // Typist progress can now meet or exceed passage length - this is the winning condition
         if (theTypist.getProgress() >= PASSAGE_LENGTH)
         {
             System.out.println("  And the winner is... " + theTypist.getName() + "!");

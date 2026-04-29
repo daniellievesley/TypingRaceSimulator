@@ -7,7 +7,7 @@ Object Oriented Programming Project — ECS414U
 ```
 TypingRaceSimulator/
 ├── Part1/    # Textual simulation (Java, command-line)
-└── Part2/    # GUI simulation (to be completed)
+└── part2/    # GUI simulation (Java, GUI based application)
 ```
 
 ## Part 1 — Textual Simulation
@@ -22,22 +22,27 @@ javac Typist.java TypingRace.java
 ### How to run
 
 The race is started by calling `startRace()` on a `TypingRace` object.
-A simple way to test this is to add a `main` method to `TypingRace`, for example:
+A simple way to test this is to use the `main` method of the `Main` class, which serves as an entry point to the program, creating 3 typist objects and a race object. This method starts the race. The race object's `addTypist()` method is called, passing in the newly created Typist objects to the race. This means that, now with typists added, the race can be started by calling `startRace()` on the race object.
 
 ```java
-public static void main(String[] args) {
-    TypingRace race = new TypingRace(40);
-    race.addTypist(new Typist('①', "TURBOFINGERS", 0.85), 1);
-    race.addTypist(new Typist('②', "QWERTY_QUEEN",  0.60), 2);
-    race.addTypist(new Typist('③', "HUNT_N_PECK",   0.30), 3);
-    race.startRace();
+public class Main {
+    public static void main (String[] args){
+        Typist t1 = new Typist ('\u2460', "TurboTyper", 0.6);
+        Typist t2 = new Typist ('\u2461', "QwertyMaster", 0.8);
+        Typist t3 = new Typist ('\u2462', "QuickTyper", 0.4);
+        TypingRace game = new TypingRace(7);
+        game.addTypist(t1, 1);
+        game.addTypist(t2, 2);
+        game.addTypist(t3, 3);
+        game.startRace();
+    }
 }
 ```
 
 Then run:
 
 ```bash
-java TypingRace
+java Main
 ```
 
 ## Part 2 — GUI Simulation

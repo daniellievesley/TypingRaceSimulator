@@ -1,3 +1,5 @@
+package part1;
+
 public class Main {
     public static void main (String[] args){
         Typist t1 = new Typist ('\u2460', "TurboTyper", 0.07);

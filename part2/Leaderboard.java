@@ -30,10 +30,11 @@ public class Leaderboard extends JPanel{
         model.addColumn("Rank");
         model.addColumn("Name");
         model.addColumn("Points");
+        model.addColumn("Badges");
         Typist[] t = game.getTypists();
         Arrays.sort(t, Comparator.comparing(Typist::getPoints).reversed()); // typists sorted on order of H-L points
         for (int i=0; i<t.length; i++){
-            Object[] row = {i+1, game.getTypists()[i].getName(), game.getTypists()[i].getPoints()};
+            Object[] row = {i+1, game.getTypists()[i].getName(), game.getTypists()[i].getPoints(), game.getTypists()[i].getBadgeString()};
             model.insertRow(i, row);
         }
         tablePanel.add(table);

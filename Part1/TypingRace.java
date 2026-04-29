@@ -342,6 +342,7 @@ public class TypingRace
             typists[i].awardPoints((int) Math.round(wpm/10.0));
             if (typists[i].isBurntOut()!=false){
                 typists[i].awardPoints(5);
+                typists[i].increaseBOFree();
             }
         }
     }
@@ -351,6 +352,7 @@ public class TypingRace
             // check for 5 consec Burn Out Free Turns 
             if (typists[i].getBOFreeTurns()==5){
                 typists[i].awardBadge("Iron Fingers");
+                System.out.println("Awarding iron ");
             }
             // check for 3 win count 
             if (typists[i].getWinCount()==3){

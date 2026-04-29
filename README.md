@@ -47,7 +47,14 @@ java Main
 
 ## Part 2 — GUI Simulation
 
-To be implemented as part of the coursework. Place all GUI-related source files in this folder. The graphical version is started by calling `startRaceGUI()`.
+Graphical application, as part of the assignment. 
+
+### How to compile
+
+```bash
+javac part2/CustomiseTypists.java part2/GameData.java part2/IntroPage.java part2/Leaderboard.java part2/RacePage.java part2/RaceRecord.java part2/TypingRace.java part2/TypingRaceSimulator.java part2/Typist.java part2/TypistRowData.java
+java part2.TypingRaceSimulator
+```
 
 ## Dependencies
 

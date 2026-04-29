@@ -40,6 +40,8 @@ public class Leaderboard extends JPanel{
         tablePanel.add(table);
 
         // comparison view 
+        JLabel infoForComparisonSupport = new JLabel("Select the typists you wish to compare, and the metric from the dropdown. Then, press compare!");
+        comparisonView.add(infoForComparisonSupport);
         List<JCheckBox> typistSelectionBoxes = new ArrayList<>();
         for (int i=0; i<game.getTypists().length; i++){
             JCheckBox typistSelection = new JCheckBox(game.getTypists()[i].getName());

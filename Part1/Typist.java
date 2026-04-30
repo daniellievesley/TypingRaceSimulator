@@ -123,7 +123,7 @@ public class Typist
      */
     public int getBurnoutTurnsRemaining()
     {
-        if (this.burnOut){
+        if (isBurntOut()){
             return burnOutTurns;
         }
         else {
@@ -158,7 +158,7 @@ public class Typist
      */
     public void typeCharacter()
     {
-        if (!(this.burnOut)){
+        if (!(isBurntOut())){
             this.currentProgress= this.currentProgress+1;
         }
     }

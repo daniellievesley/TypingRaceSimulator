@@ -6,8 +6,23 @@ Object Oriented Programming Project — ECS414U
 
 ```
 TypingRaceSimulator/
-├── Part1/    # Textual simulation (Java, command-line)
+├── Part1/ # Textual simulation (Java, command-line)
+│   ├── TypingRace.java
+│   ├── Typist.java
+│   ├── Main.java    
+│
 └── part2/    # GUI simulation (Java, GUI based application)
+│   ├── CustomiseTypists.java
+│   ├── GameData.java
+│   ├── IntroPage.java
+│   ├── Leaderboard.java
+│   ├── RacePage.java
+│   ├── RaceRecord.java
+│   ├── TypingRace.java
+│   ├── TypingRaceSimulator.java
+│   ├── Typist.java
+│   ├── TypistRowData.java
+
 ```
 
 Part 2 contains copies of part 1 files such as `Typist.java` and `TypingRace.java`. These copies are adapted for the GUI implementation and contain new methods and instance variables, as required. Files held in part 1 are for the terminal based version only and are unchanged by the GUI development and any changes that this may brought. Both parts can be compiled and run independently.

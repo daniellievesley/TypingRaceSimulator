@@ -128,6 +128,7 @@ public class RacePage extends JPanel {
         JTextArea passageTxt = new JTextArea(passagetoSend);
         add(new JScrollPane(passageTxt), BorderLayout.NORTH);
         passageTxt.setEditable(false);
+        passageTxt.setLineWrap(true);
 
         // area to display races (rows)
         JPanel typistLanes = new JPanel();

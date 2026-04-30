@@ -62,7 +62,7 @@ public class Typist
      */
     public void recoverFromBurnout()
     {
-        if (this.burnOut){
+        if (isBurntOut()){
             if (this.burnOutTurns==1){
                 this.burnOut = false;
                 this.burnOutTurns = 0;

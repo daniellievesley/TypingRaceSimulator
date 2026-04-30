@@ -40,23 +40,29 @@ public class Leaderboard extends JPanel{
         // clear existing table 
         removeAll();
         this.app = app;
+        // creating new 'sub' panels which will hold the elements making the leaderboard view
         JPanel tablePanel = new JPanel();
         JPanel comparisonView = new JPanel();
+        // stacking by applying Y axis box layout
         comparisonView.setLayout(new BoxLayout(comparisonView, BoxLayout.Y_AXIS));
         tablePanel.setLayout(new BoxLayout(tablePanel, BoxLayout.Y_AXIS));
         add(tablePanel, BorderLayout.CENTER);
         add(comparisonView, BorderLayout.NORTH);
+        // model to store the table data and provides easy operations to add rows 
         DefaultTableModel model = new DefaultTableModel();
         JTable table = new JTable (model);
+        // setting scroll pane for table scrolling - future proofing for larger data
         JScrollPane scrlPane = new JScrollPane(table);
+        // adding columns
         model.addColumn("Rank");
         model.addColumn("Name");
         model.addColumn("Points");
         model.addColumn("Badges");
         Typist[] t = game.getTypists();
         Arrays.sort(t, Comparator.comparing(Typist::getPoints).reversed()); // typists sorted on order of H-L points
+        // adding rows by iterating through each typist (IN ORDER OF POINTS HIGHEST)
         for (int i=0; i<t.length; i++){
-            Object[] row = {i+1, game.getTypists()[i].getName(), game.getTypists()[i].getPoints(), game.getTypists()[i].getBadgeString()};
+            Object[] row = {i+1, t[i].getName(), t[i].getPoints(), t()[i].getBadgeString()};
             model.insertRow(i, row);
         }
         tablePanel.add(scrlPane);

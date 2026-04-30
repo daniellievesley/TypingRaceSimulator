@@ -11,7 +11,7 @@ TypingRaceSimulator/
 │   ├── Typist.java
 │   ├── Main.java    
 │
-└── part2/    # GUI simulation (Java, GUI based application)
+├── part2/   # GUI simulation (Java, GUI based application)
 │   ├── CustomiseTypists.java
 │   ├── GameData.java
 │   ├── IntroPage.java
@@ -22,7 +22,8 @@ TypingRaceSimulator/
 │   ├── TypingRaceSimulator.java
 │   ├── Typist.java
 │   ├── TypistRowData.java
-
+│
+└── README.md
 ```
 
 Part 2 contains copies of part 1 files such as `Typist.java` and `TypingRace.java`. These copies are adapted for the GUI implementation and contain new methods and instance variables, as required. Files held in part 1 are for the terminal based version only and are unchanged by the GUI development and any changes that this may brought. Both parts can be compiled and run independently.

@@ -10,6 +10,8 @@ TypingRaceSimulator/
 └── part2/    # GUI simulation (Java, GUI based application)
 ```
 
+Part 2 contains copies of part 1 files such as `Typist.java` and `TypingRace.java`. These copies are adapted for the GUI implementation and contain new methods and instance variables, as required. Files held in part 1 are for the terminal based version only and are unchanged by the GUI development and any changes that this may brought.
+
 ## Part 1 — Textual Simulation
 
 ### How to compile
@@ -47,7 +49,7 @@ java Main
 
 ## Part 2 — GUI Simulation
 
-Graphical application, as part of the assignment.
+Graphical application, as part of the assignment. 
 
 ### How to compile
 To compile, open a terminal shell and load the project root (TypingRaceSimulator) and use the following command-line commands to compile:

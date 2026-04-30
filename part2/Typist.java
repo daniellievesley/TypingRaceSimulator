@@ -1,8 +1,10 @@
 /**
- * Write a description of class Typist here.
+ * Typist is the class of the indvidual players within the simulation game.
+ * Each typist has various metrics and score information stored about them and their progress, which is stored here.
+ * A typist has several fields such as their progress and acccuracy (which are variable) and some which are fixed such as their name and symbol.
  *
  * @author Daniel Lievesley
- * @version 25/03/2026
+ * @version 1.0
  */
 
 package part2;
@@ -34,13 +36,6 @@ public class Typist
     private int winCount;
     private ArrayList <String> badges;
 
-    // Fields of class Typist
-    // Hint: you will need six fields. Think carefully about their types.
-    // One of them tracks how far along the passage the typist has reached.
-    // Another tracks whether the typist is currently burnt out.
-    // A third tracks HOW MANY turns of burnout remain (not just whether they are burnt out).
-    // The remaining three should be fairly obvious.
-
 
 
 
@@ -52,6 +47,10 @@ public class Typist
      * @param typistSymbol  a single Unicode character representing this typist (e.g. '①', '②', '③')
      * @param typistName    the name of the typist (e.g. "TURBOFINGERS")
      * @param typistAccuracy the typist's accuracy rating, between 0.0 and 1.0
+     * @param mistype this holds the individual mistype base calculated for the typist based on customisations
+     * @param duration this holds the duration of burn out if the user is in burn out mode (based on customisations)
+     * @param headphones this holds boolean value of whether headphones are requested for an accessory
+     * @param colour this holds the colour object of the typist's chosen colour identifier
      */
     public Typist(char typistSymbol, String typistName, double typistAccuracy, double mistype, int duration, boolean headphones, Color colour)
     {
@@ -255,88 +254,169 @@ public class Typist
         this.symbol = newSymbol;
     }
 
+    /**
+     * Reset mistype status for a typist - sets attribute to false
+     */
     public void resetMistype(){
         this.justMistyped = false;
     }
 
+    /**
+     * Returns the contents of the mistype status attribute
+     * @return mistype status attribute returned - boolean value
+     */
     public boolean mistypeStatus(){
         return this.justMistyped;
     }
 
+    /**
+     * Returns the original accuracy of the typist - before the game began and any bonuses were added
+     * @return originalAccuracy value double held
+     */
     public double getoriginalAccuracy(){
         return originalAccuracy;
     }
 
+    /**
+     * Returns the contents of the mistypeBase attribute (the base calculated after accessories)
+     * @return double which holds mistype base 
+     */
     public double getMistypeBase(){
         return this.MISTYPE_BASE;
     }
 
+    /**
+     * Returns the contents of the burn out duration attribute
+     * @return burn out duration attribute as integer
+     */
     public int getburnOutDuration(){
         return this.BURNOUT_DURATION;
     }
 
+    /**
+     * Returns whether the user has headphones accessory
+     * @return boolean value of noise cancelling attribute
+     */
     public boolean getHeadphones(){
         return this.NOISE_CANCELLING;
     }
 
+    /**
+     * Increments mistype count by 1
+     */
     public void incrementMistype(){
         this.mistypeCount++;
     }
 
+    /**
+     * Returns the number of mistypes the user has had
+     * @return mistype count attribute as integer
+     */
     public int getMistypeCount(){
         return this.mistypeCount;
     }
 
+    /**
+     * Increases keystrokes by 1 to track typist activity
+     **/
     public void incrementKeystroke(){
         this.totalKeystrokes++;
     }
 
+    /**
+     * Returns the number of keystroke counts of the typist
+     * @return int keystroke count value
+     */
     public int getKeystrokeCount(){
         return this.totalKeystrokes;
     }
 
+    /**
+     * Returns the number of burn outs the typist has had
+     * @return burn out count of typist as int
+     */
     public int getBurnOutCount(){
         return this.burntOutCount;
     }
 
+    /**
+     * Returns the best WPM by the typist so far in the game
+     * @return best WPM ever experienced by typist as double
+     */
     public double getBestWPMSoFar(){
         return this.bestWPMSoFar;
     }
 
+    /**
+     * Checks whether a WPM is a record for the typist by comparing to the record already stored.
+     * If it is a record - it updates the typist attribute bestWPMSoFar
+     * @param WPMjustNow - is the WPM to be tested
+     */
     public void checkBestWPMSoFar(double WPMjustNow){
         if (WPMjustNow > this.getBestWPMSoFar()){
             this.bestWPMSoFar = WPMjustNow;
         }
     }
 
+    /**
+     * Holds the race details such as analytics which can be used for later comparison - adds these to a list
+     * @param details - is the record object to be added to the list
+     */
     public void recordRace(RaceRecord details){
         this.racesCompleted.add(details);
     }
 
+    /**
+     * Adds points to a typist's current points value
+     * @param pointsToAward- is the points that need to be added to the count
+     */
     public void awardPoints(int pointsToAward){
         this.points= this.points+pointsToAward;
     }
 
+    /**
+     * Returns the number of points a typist has in the whole game so far
+     * @return number of points accrued so far as int
+     */
     public int getPoints(){
         return this.points;
     }
 
+    /**
+     * Increases the number of burn out free turns that the typist has had by 1
+     */
     public void increaseBOFree(){
         this.consecBOFreeTurns++;
     }
 
+    /**
+     * Returns number of burn out free turns recorded
+     * @return int count of turns without a burn out
+     */
     public int getBOFreeTurns(){
         return this.consecBOFreeTurns;
     }
 
+    /**
+     * Returns the stored number of wins by a typist in a game
+     * @return number of wins by the typist in a game as int
+     */
     public int getWinCount(){
         return this.winCount;
     }
 
+    /**
+     * Increases win count by 1
+     */
     public void addWintoCount(){
         this.winCount++;
     }
 
+    /**
+     * Adds a badge (string val) to the typist's list of won badges. List so that there can be more badges added in future
+     * Only will add a badge if the badge has not already been awarded
+     * @param badge - string badge to be added to the list of typist badges
+     */
     public void awardBadge(String badge){
         for (int i=0; i<this.badges.size(); i++){
             if (this.badges.get(i).equals(badge)){
@@ -346,6 +426,10 @@ public class Typist
         this.badges.add(badge);
     }
 
+    /**
+     * Returns the string line of badges that have been won by a typist 
+     * @return string value of badges won (string is the badges concatenated by ,) (e.g Badge 1, Badge 2,)
+     */
     public String getBadgeString(){
         String toRtn = "";
         for (int i=0; i<this.badges.size(); i++){

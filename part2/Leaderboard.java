@@ -70,13 +70,14 @@ public class Leaderboard extends JPanel{
         // comparison view 
         JLabel infoForComparisonSupport = new JLabel("Select the typists you wish to compare, and the metric from the dropdown. Then, press compare!");
         comparisonView.add(infoForComparisonSupport);
+        // storing references to the typist selection boxes
         List<JCheckBox> typistSelectionBoxes = new ArrayList<>();
         for (int i=0; i<game.getTypists().length; i++){
+            // adding a checkbox for each typist in the game
             JCheckBox typistSelection = new JCheckBox(game.getTypists()[i].getName());
             typistSelectionBoxes.add(typistSelection);
             comparisonView.add(typistSelection);
         }
-
         List<String> metricToCompare = List.of("WPM", "Points", "Accuracy");
         JComboBox<String> metricChosen = new JComboBox<>(metricToCompare.toArray(new String[0]));
         comparisonView.add(metricChosen);
@@ -85,7 +86,9 @@ public class Leaderboard extends JPanel{
         JTextArea comparisonOutput = new JTextArea();
         comparisonView.add(comparisonOutput);
         comparisonOutput.setEditable(false);
+        // action listener to pull the metrics and display these to output area once button pressed
         compareTypistsReq.addActionListener(e -> {
+            // clear area on EACH request
             comparisonOutput.setText("");
             List<Typist> typiststoCompare = new ArrayList<>();
             for (int i=0; i<typistSelectionBoxes.size(); i++){

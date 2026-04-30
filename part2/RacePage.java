@@ -1,3 +1,12 @@
+/**
+ * RacePage is the class which houses the visuals of the race within the application
+ * This class uses the race logic within the TypingRace class along with Swing visuals
+ * This card is displayed within wider app when all customisations/settings have been chosen
+ *
+ * @author Daniel Lievesley
+ * @version 1.0
+ */
+
 package part2;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -6,6 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 
+/**
+ * RacePage is the class which houses the visuals of the race within the application
+ * This class uses the race logic within the TypingRace class along with Swing visuals
+ * This card is displayed within wider app when all customisations/settings have been chosen
+ */
 public class RacePage extends JPanel {
     TypingRace game;
     List<JLabel>passageProgresses;
@@ -15,14 +29,15 @@ public class RacePage extends JPanel {
     List<JLabel>statusUpdates;
     long startTime;
     long endTime;
-    JPanel mainPanel;
+    //JPanel mainPanel;
     JPanel app;
     Leaderboard board;
 
-    public RacePage(JPanel mainPanel){
-        JLabel label = new JLabel("RACE PAGE", SwingConstants.CENTER);
-        JButton finishBtn = new JButton("Finish race");
-        this.mainPanel = mainPanel;
+    /**
+     * constructor for object RacePage
+     * creates object RacePage
+     */
+    public RacePage(){
     }
 
     public void passData (GameData gameinfo, List<TypistRowData> typistData, JPanel app, Leaderboard board){

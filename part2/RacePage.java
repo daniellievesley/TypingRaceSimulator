@@ -40,10 +40,19 @@ public class RacePage extends JPanel {
     public RacePage(){
     }
 
+    /**
+     * passData() method which creates game and typists based on settings chosen
+     * using swing to display typist lanes and games visual progress
+     * @param gameInfo contains the GameData object which holds customisations for global settings
+     * @param typistData contains list of typist's individual settings
+     * @param app contains the app panel which this is displayed in
+     * @param board contains the leaderboard object which is the card following this
+     */
     public void passData (GameData gameinfo, List<TypistRowData> typistData, JPanel app, Leaderboard board){
         this.app = app;
         this.board = board;
-        String passagetoSend = "The quick brown fox jumps over the lazy dog. It is often used to practice typing because it includes every letter.";
+        String passagetoSend = "Sample passage";
+        // selection statements to determine passage to be used (pre made or custom)
         if (gameinfo.getLen().equals("Short")){
             passagetoSend = "Malta is an island nation in Europe. With the smallest population in the European Union (EU), it packs a punch!";
         }
@@ -56,18 +65,24 @@ public class RacePage extends JPanel {
         else if (gameinfo.getLen().equals("Custom")){
             passagetoSend = gameinfo.getPassage();
         }
+        // number of characters in passage
         int passageLength = passagetoSend.length();
 
+        // reset screen - remove existing races etc
         removeAll();
+        // using border layout
         setLayout(new BorderLayout());
-
+        // footer will hold messages about wins etc
         footer = new JPanel();
         footer.setLayout(new BoxLayout(footer, BoxLayout.Y_AXIS));
         add(footer, BorderLayout.SOUTH);
 
+        // initialisation of TypingRace object
         TypingRace game = new TypingRace(passagetoSend, gameinfo, this);
+        //stored as attribute of this object
         this.game = game;
         
+        // determine typist attributes based on settings chosen
         for (int i=0; i<typistData.size(); i++){
             TypistRowData d = typistData.get(i);
             double acc = 0.9;
@@ -124,6 +139,7 @@ public class RacePage extends JPanel {
         List<JLabel>statusUpdates=new ArrayList<>();
         this.statusUpdates=statusUpdates;
         
+        // creating row with symbol, passage and update area 
         for (int i=0; i<typistData.size(); i++){
             JPanel row = new JPanel(new BorderLayout());
             row.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -134,24 +150,24 @@ public class RacePage extends JPanel {
             statusUpdates.add(statusUpdate);
             JLabel passage = new JLabel();
             passageProgresses.add(passage);
-            //passage.setEditable(false);
             passage.setText(passagetoSend);
             row.add(passage, BorderLayout.CENTER);
             typistLanes.add(row);
         }
+        // record time and begin race
         recordStartTime();
         newRound();
+        // output area for 'winner display' containing who won and accuracy change message etc
         this.winnerDisplay = new JPanel();
         this.winnerDisplay.setLayout(new BoxLayout(this.winnerDisplay, BoxLayout.Y_AXIS));
         footer.add(winnerDisplay);
+        // buttons to start new race or view leaderboard both with action listeners
         JButton newRace = new JButton("Start new race");
         JButton viewLeaderboard = new JButton("View leaderboard");
         footer.add(newRace);
         footer.add(viewLeaderboard);
         newRace.addActionListener(e ->  {
             winnerDisplay.removeAll();
-            revalidate();
-            repaint();
             newRound();
         });
         viewLeaderboard.addActionListener(e -> {
@@ -162,22 +178,41 @@ public class RacePage extends JPanel {
         });
     }
 
+    /**
+     * recordStartTime() method which record current time and store this as obj attribute
+     */
     public void recordStartTime(){
         this.startTime = System.nanoTime();
     }
 
+    /**
+     * recordEndTime() method which record current time and store this as obj attribute
+     */
     public void recordEndTime(){
         this.endTime = System.nanoTime();
     }
 
+    /**
+     * recordStartTime() method which returns start time attribute
+     * @return time stored as start 
+     */
     public long getStartTime(){
         return this.startTime;
     }
 
+    /**
+     * recordEndTime() method which returns end time attribute
+     * @return time stored as end time
+     */
     public long getEndTime(){
         return this.endTime;
     }
 
+    /**
+     * showTypistUpdate() method which update the row of the typist
+     * @param updatetoDisplay string which will be displayed
+     * @param identifier the number of the typist - which will be used to show it in the correct row
+     */
     public void showTypistUpdate(String updatetoDisplay, int identifier){
         for (int i=0; i<statusUpdates.size(); i++){
             if (identifier==i){
@@ -189,6 +224,9 @@ public class RacePage extends JPanel {
     }
 
 
+    /**
+     * newRound() method which creates a new race starting a turn on game object and timing it 
+     */
     public void newRound(){
         game.resetAll();
         
@@ -207,16 +245,21 @@ public class RacePage extends JPanel {
 
     }
 
+    /**
+     * printResults() method which will print the string into the winner panel (winnerDisplay)
+     * @param winnerText - contains the string to be displayed
+     */
     public void printResults(String winnerText){
         if (winnerDisplay == null) {
             return;
         }
         JLabel texttoShow = new JLabel(winnerText);
         winnerDisplay.add(texttoShow);
-        revalidate();
-        repaint();
     }
-        
+    
+    /**
+     * displayProgress() method which shows the live progress of each typist using HTML styling to colour in the chosen colour by the typist, as according to progress from game logic
+     */
     public void displayProgress(){
         Typist[] typistsInGame = game.getTypists();
         for (int i=0; i<game.getTypists().length; i++){

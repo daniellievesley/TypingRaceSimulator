@@ -62,7 +62,7 @@ public class Leaderboard extends JPanel{
         Arrays.sort(t, Comparator.comparing(Typist::getPoints).reversed()); // typists sorted on order of H-L points
         // adding rows by iterating through each typist (IN ORDER OF POINTS HIGHEST)
         for (int i=0; i<t.length; i++){
-            Object[] row = {i+1, t[i].getName(), t[i].getPoints(), t()[i].getBadgeString()};
+            Object[] row = {i+1, t[i].getName(), t[i].getPoints(), t[i].getBadgeString()};
             model.insertRow(i, row);
         }
         tablePanel.add(scrlPane);

@@ -1,3 +1,13 @@
+/**
+ * Leaderboard is a class which will use Swing elements to display a table for rankings
+ * The leaderboard comprises of a row for each typists along with their points and badges
+ * A comparison view is also available, allowing users to compare 2+ typists based on their metrics
+ * At any point, the user can return to the game to continue.
+ *
+ * @author Daniel Lievesley
+ * @version 1.0
+ */
+
 package part2;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -8,13 +18,26 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+
 public class Leaderboard extends JPanel{
     JPanel app;
-    public Leaderboard(JPanel mainPanel){
+
+     /**
+     * Constructor for objects of class Leaderboard
+     * Sets the leaderboard panel to a border layout 
+     */
+    public Leaderboard(){
         setLayout(new BorderLayout());
     }
 
+     /**
+     * create() method which sets up the leaderboard, creating a new one for every request - pulls most up to date data
+     * using swing table to display ranks and swing input elements to obtain comparison request
+     * @param game contains the TypingRace object game - along with inside the typists - where data will be pulled from
+     * @param app contains wider app panel which this 'card' will be displayed in
+     */
     public void create(TypingRace game, JPanel app){
+        // clear existing table 
         removeAll();
         this.app = app;
         JPanel tablePanel = new JPanel();

@@ -10,7 +10,7 @@ public class TypingRaceSimulator {
         JPanel appCard = new JPanel(layout);
         CustomiseTypists customiseCard = new CustomiseTypists(appCard);
         RacePage raceUI = new RacePage(appCard);
-        Leaderboard boardUI = new Leaderboard(appCard);
+        Leaderboard boardUI = new Leaderboard();
         IntroPage introCard = new IntroPage(appCard, customiseCard, raceUI, boardUI);
         appCard.add(introCard, "Intro");
         appCard.add(customiseCard, "CustomiseTypists");

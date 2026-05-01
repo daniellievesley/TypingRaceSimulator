@@ -17,6 +17,10 @@ import javax.swing.*;
 
 public class TypingRaceSimulator {
     public static void main(String[] args){
+        startRaceGUI();
+    }
+
+    public static void startRaceGUI(){
         JFrame mainApp = new JFrame("Typing Race Simulator");
         mainApp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // card layout manager created

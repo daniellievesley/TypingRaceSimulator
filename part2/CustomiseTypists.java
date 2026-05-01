@@ -67,7 +67,7 @@ public class CustomiseTypists extends JPanel {
             keyboardType.setName("KeyboardType");
             typistChildPanel.add(keyboardType);
             JTextField symbol = new JTextField("Symbol", 10);
-            keyboardType.setName("Symbol");
+            symbol.setName("Symbol");
             typistChildPanel.add(symbol);
             JButton clrPickerReq = new JButton("Pick a typist colour");
             typistChildPanel.add(clrPickerReq);

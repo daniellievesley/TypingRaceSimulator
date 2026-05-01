@@ -6,7 +6,7 @@ Object Oriented Programming Project — ECS414U
 
 ```
 TypingRaceSimulator/
-├── Part1/ # Textual simulation (Java, command-line)
+├── part1/ # Textual simulation (Java, command-line)
 │   ├── TypingRace.java
 │   ├── Typist.java
 │   ├── Main.java    

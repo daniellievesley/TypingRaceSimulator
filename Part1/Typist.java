@@ -206,7 +206,7 @@ public class Typist
      *
      * @param newSymbol the new symbol character
      */
-    public void setSymbol(char newSymbol)
+    private void setSymbol(char newSymbol)
     {
         this.symbol = newSymbol;
     }

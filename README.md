@@ -34,7 +34,7 @@ Part 2 contains copies of part 1 files such as `Typist.java` and `TypingRace.jav
 
 ```bash
 cd Part1
-javac Typist.java TypingRace.java
+javac Typist.java TypingRace.java Main.java
 ```
 
 ### How to run
